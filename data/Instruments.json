@@ -1,0 +1,26 @@
+{
+	"Percussion":[
+		{
+			"name": "Cajon",
+			"soundPath1": "Material/cajon.mp3",
+			"soundPath2": "Material/cajon_small.mp3",
+			"soundName1": "Light",
+			"soundName2": "Heavy"
+			
+		},
+		{
+			"name": "Taiko",
+			"soundPath1": "Material/cajon.mp3",
+			"soundPath2": "Material/cajon_small.mp3",
+			"soundName1": "Light1",
+			"soundName2": "Heavy1"
+		},
+		{
+			"name": "Drums ",
+			"soundPath1": "Material/cajon.mp3",
+			"soundPath2": "Material/cajon_small.mp3",
+			"soundName1": "Light2",
+			"soundName2": "Heavy2"
+		}
+	]
+}
