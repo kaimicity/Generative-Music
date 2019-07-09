@@ -1,4 +1,5 @@
 import ddf.minim.* ;
+import com.phidget22.* ;
 
 static Minim minim ;
 
@@ -11,6 +12,7 @@ PVector stonePosition;
 float instructionWidth;
 float instructionHeight;
 float instrumentOffset;
+float maxSound;
 float panelOffset;
 float panelSpeed;
 float scrollCurrentY;
@@ -18,6 +20,7 @@ float scrollHeight;
 float scrollWidth;
 float slideBarWidth;
 float slideBarY;
+float soundValue;
 float stoneR;
 
 int arrowTik;
@@ -50,7 +53,6 @@ ArrayList<SoundTrack> tracks;
 ArrayList<PanelButton> pbs;
 ArrayList<Instrument> currentInstruments;
 
-PGraphics panel;
 
 PFont nameFont;
 static PFont percussionFont;
@@ -61,6 +63,8 @@ boolean back;
 
 static JSONObject instruments;
 JSONObject instructions;
+
+VoltageInput soundSensor;
 
 PercussionInstrument currentPercussion;
 SlideTag ignoreTag;
@@ -82,6 +86,7 @@ void setup() {
   instructionWidth = width * 2 / 7;
   instructionHeight = height / 2;
   instrumentOffset = PI / 3;
+  maxSound = 0.15;
   panelOffset = 0;
   panelSpeed = 0.01;
   scrollHeight = height / 100;
@@ -114,6 +119,15 @@ void setup() {
   instruments = loadJSONObject("Instruments.json");
   instructions = loadJSONObject("Instruction.json");
 
+  try {
+    soundSensor = new VoltageInput();
+    soundSensor.setDeviceSerialNumber(274066);     
+    soundSensor.setChannel(1);  
+    soundSensor.open();
+  } 
+  catch (PhidgetException e) {    
+    System.out.println(e);
+  }
   Database.init();
   init();
 }
@@ -122,11 +136,14 @@ void init() {
   bondedNumber = 0;
   currentPercussionIndex = 0;
   panelOpacity = 255;
+  lastReadTime = 0;
   uiOpacity = 0;
   dragging = 0;
 
   scrollCurrentY = 0;
+  soundValue = 0; 
   showInstruction = true;
+  openRead = true;
 
   currentPanel = "NONE";
 
@@ -167,7 +184,8 @@ void draw() {
     drawPanel();
     drawInstruction(panelOpacity);
     if (test != -1) {
-      cursor(HAND);
+      if (!enter)
+        cursor(HAND);
       textAlign(CENTER, CENTER);
       textFont(nameFont);
       textSize(height / 15);
@@ -380,9 +398,49 @@ boolean inRightSwitchButton() {
 
 float lowLine;
 float highLine;
+int lastReadTime;
+boolean openRead;
+double lastReadValue;
 void drawSlideBar() {
+  try {
+    double gsv = soundSensor.getSensorValue();
+    if (!enter && millis() - lastReadTime >= 300 && gsv > 0.035 && gsv - 0.03 >= soundValue / 2 && abs((float)(lastReadValue - gsv)) >= 0.003) {
+      lastReadTime = millis();
+      lastReadValue = gsv;
+      soundValue = (float)gsv - 0.03;
+      if (soundValue > maxSound)
+        soundValue = maxSound;
+    } else {
+      if (soundValue > 0)
+        soundValue -= 0.001;
+    }
+  } 
+  catch( Exception e) {   
+    System.out.println(e.toString());
+  }
   pushMatrix();
   translate(roulettePosition.x - rouletteOutR, slideBarY);
+  float currentVolumn = soundValue * 100 / maxSound;
+  noStroke();
+  fill(percussionIgnore);
+  if (currentVolumn <= currentPercussion.getLowThreshold()) {
+    quad(0, 0, slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth )* currentVolumn / 100 + slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth ) * currentVolumn / 100, 0);
+  } else if ( currentVolumn <= currentPercussion.getHighThreshold()) {
+    quad(0, 0, slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100 + slideBarWidth, - slideBarWidth, 
+      (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100, 0);
+    fill(percussionLight);
+    quad( (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100 + slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100, 0, 
+      (rouletteOutR * 2 - slideBarWidth ) * currentVolumn / 100, 0, (rouletteOutR * 2 - slideBarWidth )* currentVolumn / 100 + slideBarWidth, - slideBarWidth);
+  } else {
+    quad(0, 0, slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100 + slideBarWidth, - slideBarWidth, 
+      (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100, 0);
+    fill(percussionLight);
+    quad( (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100 + slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getLowThreshold() / 100, 0, 
+      (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getHighThreshold() / 100, 0, (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getHighThreshold() / 100 + slideBarWidth, - slideBarWidth);
+    fill(percussionHeavy);
+    quad( (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getHighThreshold() / 100, 0, (rouletteOutR * 2 - slideBarWidth ) * currentPercussion.getHighThreshold() / 100 + slideBarWidth, - slideBarWidth, 
+      (rouletteOutR * 2 - slideBarWidth )* currentVolumn / 100 + slideBarWidth, - slideBarWidth, (rouletteOutR * 2 - slideBarWidth ) * currentVolumn / 100, 0);
+  }
   fill(percussionIgnore);
   textAlign(LEFT, BOTTOM);
   textSize(height / 16);
