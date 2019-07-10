@@ -19,7 +19,7 @@ class Label{
     this.index = i;
     this.r = rouletteInR + i * interval;
     this.labelSize = r / (instrument.getName().length() * 2);
-    this.labelWidth = r / 15;
+    this.labelWidth = rouletteInR / 15;
     direct();
     this.frozen = false;
     this.instrument = instrument;

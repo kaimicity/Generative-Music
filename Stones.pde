@@ -143,7 +143,6 @@ void init() {
   scrollCurrentY = 0;
   soundValue = 0; 
   showInstruction = true;
-  openRead = true;
 
   currentPanel = "NONE";
 
@@ -363,6 +362,12 @@ void drawPercussion() {
     arrowTik = 0;
   noFill();
   mountEnterStroke(normalStroke, uiOpacity);
+  if(millis() - lastReadTime >= 100)
+    noFill();
+  else if(lastVolumn >= currentPercussion.getHighThreshold())
+    fill(percussionHeavy);
+  else if(lastVolumn >= currentPercussion.getLowThreshold())
+    fill(percussionLight);
   ellipse(stonePosition.x, stonePosition.y, stoneR * 2, stoneR * 2);
   pushMatrix();
   translate(stonePosition.x + height * 0.1, stonePosition.y);
@@ -399,8 +404,8 @@ boolean inRightSwitchButton() {
 float lowLine;
 float highLine;
 int lastReadTime;
-boolean openRead;
 double lastReadValue;
+float lastVolumn;
 void drawSlideBar() {
   try {
     double gsv = soundSensor.getSensorValue();
@@ -421,6 +426,7 @@ void drawSlideBar() {
   pushMatrix();
   translate(roulettePosition.x - rouletteOutR, slideBarY);
   float currentVolumn = soundValue * 100 / maxSound;
+  lastVolumn = currentVolumn;
   noStroke();
   fill(percussionIgnore);
   if (currentVolumn <= currentPercussion.getLowThreshold()) {
