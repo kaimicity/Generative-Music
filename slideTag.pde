@@ -24,7 +24,7 @@ class SlideTag {
   void draw() {
     pushMatrix();
     translate(roulettePosition.x - rouletteOutR, slideBarY);
-    fill(#FFFFFF);
+    fill(whiteColor);
     noStroke();
     quad(position.x + myHeight, position.y, position.x, position.y + myHeight, position.x + myWidth, position.y + myHeight, position.x + myWidth + myHeight, position.y);
     stroke(myColor);
@@ -38,7 +38,7 @@ class SlideTag {
     text(content, position.x + myHeight, position.y + myHeight * 4 / 5);
     if (draggable) {
       translate(position.x + myHeight * 7 / 6, position.y - myHeight / 6);
-      fill(#FFFFFF);
+      fill(whiteColor);
       rect( - myHeight / 3, 0, myHeight / 3, myHeight / 3);
     }
     popMatrix();

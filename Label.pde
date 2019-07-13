@@ -1,4 +1,4 @@
-class Label{
+class Label {
   int index;
   int r;
   PVector center = roulettePosition;
@@ -14,67 +14,102 @@ class Label{
   float labelSize;
   color textColor = color(0, 0, 0);
   boolean walking;
-  
-  Label(int i, Instrument instrument){
+  boolean creating;
+
+  Label(int i, Instrument instrument) {
     this.index = i;
     this.r = rouletteInR + i * interval;
     this.labelSize = r / (instrument.getName().length() * 2);
     this.labelWidth = rouletteInR / 15;
-    direct();
     this.frozen = false;
     this.instrument = instrument;
     this.labelLength = PI / 12 * textWidth(instrument.getName()) / 60;
-    this.speed = PI / 480;
-    this.labelAngle = - PI / 2 + labelLength / 2;
+    this.labelAngle =  PI * 3 / 2 + labelLength / 2;
+    creating = true;
     walking = false;
+    direct();
   }
-  
-  void setInstrument(Instrument ins){
+
+  void setInstrument(Instrument ins) {
     this.instrument = ins;
   }
-  
-  void direct(){
+
+  void setCreating(boolean c) {
+    this.creating = c;
+  }
+
+   void setSpeed(float newSpeed){
+     this.speed = newSpeed;
+   }
+  void direct() {
     double mark = Math.random();
-    if( mark < 0.5){
+    if ( mark < 0.5) {
       direction = 1;
-    } else{
+    } else {
       direction = - 1;
     }
   }
+
+  float getAngle() {
+    return this.labelAngle - labelLength / 2;
+  }
+
+  float getLength() {
+    return this.labelLength;
+  }
   
-  void draw(){
+  float getSpeed(){
+    return this.speed;
+  }
+  
+  void startWalking(){
+    this.walking = true;
+  }
+  
+  void stopWalking(){
+    this.walking = false;
+  } 
+  
+  void draw() {
     pushMatrix();
     translate(center.x, center.y);
-    mountEnterFill(labelColor, uiOpacity);
-    mountEnterStroke(strokeColor, uiOpacity);
+    if (creating && (enter || back)) {
+      fill(labelColor, uiOpacity);
+      stroke(strokeColor, uiOpacity);
+    } else {
+      fill(labelColor, trackOpacity);
+      stroke(strokeColor, trackOpacity);
+    }
     beginShape();
     vertex((r - labelWidth) * cos(labelAngle), (r - labelWidth) * sin(labelAngle));
     vertex((r + labelWidth) * cos(labelAngle), (r + labelWidth) * sin(labelAngle));
-    for(float i = 0; i < labelLength; i+= 0.1){
-      vertex((r + labelWidth) * cos(labelAngle - i), (r + labelWidth) * sin(labelAngle - i));  
+    for (float i = 0; i < labelLength; i+= 0.1) {
+      vertex((r + labelWidth) * cos(labelAngle - i), (r + labelWidth) * sin(labelAngle - i));
     }
     vertex((r + labelWidth) * cos(labelAngle-labelLength), (r + labelWidth) * sin(labelAngle-labelLength));
     vertex((r - labelWidth) * cos(labelAngle-labelLength), (r - labelWidth) * sin(labelAngle-labelLength));
-    for(float i = 0; i < labelLength; i+= 0.1){
-      vertex((r - labelWidth) * cos(labelAngle - labelLength + i), (r - labelWidth) * sin(labelAngle - labelLength + i));  
+    for (float i = 0; i < labelLength; i+= 0.1) {
+      vertex((r - labelWidth) * cos(labelAngle - labelLength + i), (r - labelWidth) * sin(labelAngle - labelLength + i));
     }
     endShape(CLOSE);
     translate(r * cos(labelAngle-labelLength / 2), r * sin(labelAngle-labelLength / 2));
     rotate(labelAngle-labelLength / 2 + PI / 2);
-    mountEnterFill(textColor, uiOpacity);
+    if (creating && (enter || back))
+      fill(textColor, uiOpacity);
+    else
+      fill(textColor, trackOpacity);
     textAlign(CENTER, CENTER);
     textFont(instrument.getMyFont());
     textSize(labelSize);
     text(instrument.getName(), 0, 0);
     popMatrix();
-    if(walking)
+    if (walking)
       walk();
   }
-  
-  void walk(){
-    if(!frozen)
+
+  void walk() {
+    if (!frozen)
       this.labelAngle += direction * speed;
-    if(labelAngle >= 2 * PI)
-      labelAngle -= 2 * PI;
+    labelAngle = normaliseAngle(labelAngle);
   }
 }

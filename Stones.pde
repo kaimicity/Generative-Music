@@ -1,14 +1,17 @@
-import ddf.minim.* ;
+import ddf.minim.*;
 import com.phidget22.* ;
 
 static Minim minim ;
 
+PVector backButtonPosition;
 PVector roulettePosition;
 PVector instructionPosition;
 PVector instrumentPosition;
 PVector scrollPosition;
 PVector stonePosition;
 
+float backButtonWidth;
+float backButtonHeight;
 float instructionWidth;
 float instructionHeight;
 float instrumentOffset;
@@ -22,6 +25,8 @@ float slideBarWidth;
 float slideBarY;
 float soundValue;
 float stoneR;
+
+double indoorLight;
 
 int arrowTik;
 int bondedNumber;
@@ -37,15 +42,18 @@ int rouletteOutR;
 int secondaryInstrumentFontSize;
 int switchButtonR;
 int test;
+int toBond;
 int uiOpacity;
+int trackOpacity;
+int lightRefreshCounter;
 
 color unbondSoundtrack;
 color normalStroke;
 color percussionIgnore;
 color percussionLight;
 color percussionHeavy;
-
 color secondaryInstrumentColor;
+color whiteColor;
 
 String currentPanel;
 
@@ -59,17 +67,22 @@ static PFont percussionFont;
 
 boolean showInstruction;
 boolean enter;
+boolean unbonding;
 boolean back;
 
 static JSONObject instruments;
 JSONObject instructions;
 
 VoltageInput soundSensor;
+VoltageInput lightSensor;
 
+Button backButton;
+Button clearAllButton;
 PercussionInstrument currentPercussion;
 SlideTag ignoreTag;
 SlideTag lightTag;
 SlideTag heavyTag;
+SoundTrack currentTrack;
 
 void setup() {
   minim = new Minim(this) ;
@@ -80,9 +93,12 @@ void setup() {
   roulettePosition = new PVector(200 + width * 4 / 7, height * 9 / 20);
   instructionPosition = new PVector(width / 10, height / 10);
   instrumentPosition = new PVector(200 + width * 4 / 7, height * 7 / 20);
+  backButtonPosition = new PVector(width / 10, height * 13 / 20);
   scrollPosition = new PVector(width / 10 - width / 50, height / 10 - height / 100);
   stonePosition = new PVector(200 + width * 4 / 7, height * 10 / 20);
 
+  backButtonWidth = width * 2 / 7;
+  backButtonHeight = height / 10;
   instructionWidth = width * 2 / 7;
   instructionHeight = height / 2;
   instrumentOffset = PI / 3;
@@ -100,10 +116,10 @@ void setup() {
   rouletteOutR = height * 6 / 15;
   rouletteInR = height / 5;
   interval = (rouletteOutR - rouletteInR) / (numberOfRing - 1);
+  lightRefreshCounter = 0;
   panelStrokeWidth = 5;
   secondaryInstrumentFontSize = 15;
   switchButtonR = 20;
-  test = -1;
   panelR = rouletteInR - interval;
 
   unbondSoundtrack = color(#C9C9C9);
@@ -112,6 +128,7 @@ void setup() {
   percussionLight = color(120, 120, 120);
   percussionHeavy = color(60, 60, 60);
   secondaryInstrumentColor = color(#696969);
+  whiteColor = color(#FFFFFF);
 
   nameFont = createFont("fonts/TLI.ttf", 20);
   percussionFont = createFont("fonts/Mobile.ttf", 30);
@@ -119,11 +136,18 @@ void setup() {
   instruments = loadJSONObject("Instruments.json");
   instructions = loadJSONObject("Instruction.json");
 
+  backButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "BACK");
+  clearAllButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "CLEAR ALL");
+
   try {
     soundSensor = new VoltageInput();
     soundSensor.setDeviceSerialNumber(274066);     
     soundSensor.setChannel(1);  
     soundSensor.open();
+    lightSensor = new VoltageInput();
+    lightSensor.setDeviceSerialNumber(274066);     
+    lightSensor.setChannel(0);  
+    lightSensor.open();
   } 
   catch (PhidgetException e) {    
     System.out.println(e);
@@ -133,16 +157,23 @@ void setup() {
 }
 
 void init() {
-  bondedNumber = 0;
   currentPercussionIndex = 0;
   panelOpacity = 255;
+  trackOpacity = 255;
   lastReadTime = 0;
   uiOpacity = 0;
   dragging = 0;
-
   scrollCurrentY = 0;
   soundValue = 0; 
+  test = -1;
+  toBond = 0;
+  shakingCounter = 0;
+
   showInstruction = true;
+  enter = false;
+  back = false;
+  unbonding = false;
+  eraseFlag = true;
 
   currentPanel = "NONE";
 
@@ -168,39 +199,95 @@ void init() {
   ignoreTag = new SlideTag(0, "None", false, percussionIgnore);
   lightTag = new SlideTag(currentPercussion.getLowThreshold(), currentPercussion.getSoundName1(), true, percussionLight);
   heavyTag = new SlideTag(currentPercussion.getHighThreshold(), currentPercussion.getSoundName2(), true, percussionHeavy);
+  try {
+    indoorLight = lightSensor.getSensorValue();
+    println(indoorLight);
+    if (indoorLight < 0.25)
+      lightSwitch = false;
+    else
+      lightSwitch = true;
+  } 
+  catch(Exception e) {
+    println(e.toString());
+  }
 }
 
 boolean inTag1;
 boolean inTag2;
 boolean inButton1;
 boolean inButton2;
+boolean inBackButton;
+boolean inClin;
+
+double lightValue;
+boolean eraseFlag;
+boolean lightSwitch;
+int shakingCounter;
 void draw() {
-  background(255);
+  background(whiteColor);
   drawRoulette();
-  boolean inClin = inClinch();
+  inClin = inClinch();
+  inBackButton = backButton.isFocused();
+
   switch(currentPanel) {
   case "NONE":
     drawPanel();
     drawInstruction(panelOpacity);
-    if (test != -1) {
-      if (!enter)
+    if (!enter && !back) {
+      try {
+        lightValue = lightSensor.getSensorValue();
+        if (indoorLight - lightValue > 0.03 && eraseFlag) {
+          shakingCounter ++;
+          eraseFlag = false;
+          if (shakingCounter > 1 && bondedNumber > 0)
+            unbonding = true;
+        } else if (indoorLight - lightValue < 0.03) {
+          eraseFlag = true;
+        }
+      } 
+      catch(Exception e) {
+        println(e.toString());
+      }
+    }
+    if (!lightSwitch)
+      clearAllButton.draw(panelOpacity);
+    if (unbonding) {
+      trackOpacity -= 2;
+      if (trackOpacity <= 0) {
+        trackOpacity = 255;
+        unbondAll();
+        unbonding = false;
+        bondedNumber = 0;
+        toBond = 0;
+        shakingCounter = 0;
+      }
+    }
+    if (back && panelOpacity < 255) {
+      cursor(ARROW);
+      panelOpacity += 5;
+      if (panelOpacity >= 255) {
+        back = false;
+      }
+    } else if (test != -1) {
+      if (!enter && !back)
         cursor(HAND);
       textAlign(CENTER, CENTER);
       textFont(nameFont);
       textSize(height / 15);
+      fill(normalStroke);
       if (!enter)
         text(pbs.get(test).getName(), roulettePosition.x, height * 14 / 15);
       else {
         cursor(ARROW);
         fill(normalStroke, panelOpacity);
         text(pbs.get(test).getName(), roulettePosition.x, height * 14 / 15);
-        if (panelOpacity > 0) {
+        if (enter && panelOpacity > 0) {
           panelOpacity -= 5;
           if (panelOpacity <= 0)
             currentPanel = Database.buttonMark[test];
         }
       }
-    } else if (inClin)
+    } else if ((inClin || inBackButton) && !unbonding && !lightSwitch) 
       cursor(HAND);
     else
       cursor(ARROW);
@@ -208,10 +295,28 @@ void draw() {
   case "PERCUSSION":
     if (enter) {
       uiOpacity +=5;
-      if (uiOpacity >= 255)
+      if (uiOpacity >= 255) {
         enter = false;
+        currentTrack.getLabel().setCreating(false);
+      }
+    } 
+    if (back) {
+      back();
     }
     drawInstruction(uiOpacity);
+    if (!enter && !back) {
+      try {
+        lightValue = lightSensor.getSensorValue();
+        if (indoorLight - lightValue > 0.03 && currentTrack.allNotesReady()) {
+          startBack();
+        }
+      } 
+      catch(Exception e) {
+        println(e.toString());
+      }
+    }
+    if (!lightSwitch)
+      backButton.draw(uiOpacity);
     drawPercussion();
     inTag1 = lightTag.inTag();
     inTag2 = heavyTag.inTag();
@@ -219,16 +324,18 @@ void draw() {
     inButton2 = inRightSwitchButton();
     switch(dragging) {
     case 0:
-      if (inTag1 || inTag2)
-        cursor(MOVE);
-      else if (inButton1 || inButton2 || inClin)
-        cursor(HAND);
-      else 
-      cursor(ARROW);
-      if (inTag1 && mousePressed) {
-        dragging = 1;
-      } else if (inTag2 && mousePressed) {
-        dragging = 2;
+      if (!enter && !back) {
+        if (inTag1 || inTag2)
+          cursor(MOVE);
+        else if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton))
+          cursor(HAND);
+        else 
+        cursor(ARROW);
+        if (inTag1 && mousePressed) {
+          dragging = 1;
+        } else if (inTag2 && mousePressed) {
+          dragging = 2;
+        }
       }
       break;
     case 1:
@@ -265,10 +372,11 @@ void drawPanel() {
   }
   noFill();
   mountEnterStroke(normalStroke, panelOpacity);
+  strokeWeight(panelStrokeWidth / 2);
   ellipse(roulettePosition.x, roulettePosition.y, panelR * 2, panelR * 2);
   pushMatrix();
   translate(roulettePosition.x, roulettePosition.y);
-  if (mousePressed && test != -1 && !enter) {
+  if (mousePressed && test != -1 && !enter && !back) {
     fill(unbondSoundtrack);
     arc(0, 0, panelR * 2, panelR * 2, pbs.get(test).getStarting(), pbs.get(test).getStarting() + PI * 2 / 3);
   }
@@ -293,33 +401,46 @@ void mouseReleased() {
   if (inClinch()) {
     showInstruction = !showInstruction;
   }
-  if (test != -1) {
-    enter = true;
-    if (currentPanel.equals("NONE") && bondedNumber < 5) {
-      tracks.get(bondedNumber).bond(currentInstruments.get(test));
-    }
-  }
+
   switch(currentPanel) {
+  case "NONE":
+    if (test != -1 && !unbonding) {
+      enter = true;
+      currentTrack = tracks.get(toBond);
+      currentTrack.bond(currentInstruments.get(test));
+      bondedNumber ++;
+      for (SoundTrack st : tracks) {
+        if (!st.isBonded()) {
+          toBond = st.getIndex();
+          break;
+        }
+      }
+    } else if (clearAllButton.isFocused() && !enter && ! back && !lightSwitch) {
+      unbonding = true;
+    }
+    break;
   case "PERCUSSION":
     if (dragging!=0) {
       cursor(ARROW);
       dragging = 0;
-    } else if (inButton1) {
+    } else if (!enter && !back && inButton1) {
       if (currentPercussionIndex - 1 >= 0)
         currentPercussionIndex --;
       else
         currentPercussionIndex = Database.percussionInstruments.size() - 1;
       currentPercussion = Database.percussionInstruments.get(currentPercussionIndex);
-      tracks.get(bondedNumber).setInstrument(currentPercussion);
+      currentTrack.setInstrument(currentPercussion);
       tagsReset();
-    } else if (inButton2) {
+    } else if (!enter && !back && inButton2) {
       if (currentPercussionIndex + 1 <= Database.percussionInstruments.size() - 1)
         currentPercussionIndex ++;
       else
         currentPercussionIndex = 0;
       currentPercussion = Database.percussionInstruments.get(currentPercussionIndex);
-      tracks.get(bondedNumber).setInstrument(currentPercussion);
+      currentTrack.setInstrument(currentPercussion);
       tagsReset();
+    } else if (inBackButton) {
+      startBack();
     }
   }
 }
@@ -332,14 +453,14 @@ void tagsReset() {
 }
 
 void mountEnterStroke(color c, int opa) {
-  if (enter) {
+  if (enter || back) {
     stroke(c, opa);
   } else {
     stroke(c);
   }
 }
 void mountEnterFill(color c, int opa) {
-  if (enter) {
+  if (enter|| back) {
     fill(c, opa);
   } else {
     fill(c);
@@ -347,6 +468,7 @@ void mountEnterFill(color c, int opa) {
 }
 
 float tw;
+boolean adding;
 void drawPercussion() {
   mountEnterFill(normalStroke, uiOpacity);
   textFont(percussionFont);
@@ -362,12 +484,23 @@ void drawPercussion() {
     arrowTik = 0;
   noFill();
   mountEnterStroke(normalStroke, uiOpacity);
-  if(millis() - lastReadTime >= 100)
+  if (millis() - lastReadTime >= 100) {
     noFill();
-  else if(lastVolumn >= currentPercussion.getHighThreshold())
+  } else if (lastVolumn >= currentPercussion.getHighThreshold()) {
     fill(percussionHeavy);
-  else if(lastVolumn >= currentPercussion.getLowThreshold())
+    if (!adding) {
+      adding = true;
+      Note note = new PercussionNote(currentTrack.getIndex(), false);
+      currentTrack.addNote(note);
+    }
+  } else if (lastVolumn >= currentPercussion.getLowThreshold()) {
     fill(percussionLight);
+    if (!adding) {
+      adding = true;
+      Note note = new PercussionNote(currentTrack.getIndex(), true);
+      currentTrack.addNote(note);
+    }
+  }
   ellipse(stonePosition.x, stonePosition.y, stoneR * 2, stoneR * 2);
   pushMatrix();
   translate(stonePosition.x + height * 0.1, stonePosition.y);
@@ -404,17 +537,19 @@ boolean inRightSwitchButton() {
 float lowLine;
 float highLine;
 int lastReadTime;
+int lastValidTime;
 double lastReadValue;
 float lastVolumn;
 void drawSlideBar() {
   try {
     double gsv = soundSensor.getSensorValue();
-    if (!enter && millis() - lastReadTime >= 300 && gsv > 0.035 && gsv - 0.03 >= soundValue / 2 && abs((float)(lastReadValue - gsv)) >= 0.003) {
+    if (!enter && ! back && millis() - lastReadTime >= 400 && gsv > 0.035 && gsv - 0.03 >= soundValue / 2 && abs((float)(lastReadValue - gsv)) >= 0.003) {
       lastReadTime = millis();
       lastReadValue = gsv;
       soundValue = (float)gsv - 0.03;
       if (soundValue > maxSound)
         soundValue = maxSound;
+      adding = false;
     } else {
       if (soundValue > 0)
         soundValue -= 0.001;
@@ -490,7 +625,7 @@ void drawInstruction(int opa) {
   textFont(nameFont);
   textSize(20);
   text(instructions.getString(currentPanel), instructionPosition.x + 10, instructionPosition.y - scrollCurrentY + 10, instructionWidth - 20, instructionHeight - 20);
-  fill(#FFFFFF);
+  fill(whiteColor);
   strokeWeight(panelStrokeWidth / 2);
   rect(scrollPosition.x, scrollPosition.y, scrollWidth, scrollHeight);
   line(scrollPosition.x + scrollWidth, instructionPosition.y, scrollPosition.x + scrollWidth, instructionPosition.y + height / 10);
@@ -500,7 +635,7 @@ void drawInstruction(int opa) {
     noFill();
   ellipse(scrollPosition.x + scrollWidth, instructionPosition.y + height / 10 + 7.5, 15, 15);
   noStroke();
-  fill(#FFFFFF);
+  fill(whiteColor);
   rect(scrollPosition.x, 0, scrollWidth, scrollPosition.y);
 }
 
@@ -509,4 +644,40 @@ boolean inClinch() {
     return true;
   else
     return false;
+}
+
+void unbondAll() {
+  for (SoundTrack st : tracks) {
+    if (st.isBonded())
+      st.unbond();
+  }
+}
+
+void startBack() {
+  if (currentTrack.getNoteNumber() == 0) {
+    currentTrack.getLabel().setCreating(true);
+    bondedNumber --;
+  }
+  back = true;
+}
+
+void back() {
+  uiOpacity -= 5;
+  if (uiOpacity <= 0) {
+    currentPanel = "NONE";
+    if (currentTrack.getNoteNumber() == 0) {
+      currentTrack.unbond();
+      toBond = currentTrack.getIndex();
+    } else {
+      currentTrack.activate();
+    }
+  }
+}
+
+float normaliseAngle(float angle) {
+  if (angle < 0)
+    angle += PI * 2;
+  else if (angle >= PI * 2)
+    angle -= PI * 2;
+  return angle;
 }

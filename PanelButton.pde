@@ -34,10 +34,10 @@ class PanelButton {
     if ( dis < panelR) {
       float xOffset = mouseX - position.x;
       float yOffset = mouseY - position.y;
-      float angel = acos(xOffset / dis);
+      float angle = acos(xOffset / dis);
       if ( yOffset < 0)
-        angel = 2 * PI - angel;
-      if ((angel > starting && angel < starting + buttonWidth) || (angel < PI / 6 && index == 2)) {
+        angle = 2 * PI - angle;
+      if ((angle > starting && angle < starting + buttonWidth) || (angle < PI / 6 && index == 2)) {
         return true;
       } else
         return false;
