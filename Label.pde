@@ -10,6 +10,7 @@ class Label {
   float labelAngle;
   int direction;
   float speed;
+  float maxSpeed;
   boolean frozen;
   float labelSize;
   color textColor = color(0, 0, 0);
@@ -38,9 +39,10 @@ class Label {
     this.creating = c;
   }
 
-   void setSpeed(float newSpeed){
-     this.speed = newSpeed;
-   }
+  void setSpeed(float newSpeed) {
+    this.speed = newSpeed;
+    this.maxSpeed = newSpeed;
+  }
   void direct() {
     double mark = Math.random();
     if ( mark < 0.5) {
@@ -57,19 +59,19 @@ class Label {
   float getLength() {
     return this.labelLength;
   }
-  
-  float getSpeed(){
+
+  float getSpeed() {
     return this.speed;
   }
-  
-  void startWalking(){
+
+  void startWalking() {
     this.walking = true;
   }
-  
-  void stopWalking(){
+
+  void stopWalking() {
     this.walking = false;
   } 
-  
+
   void draw() {
     pushMatrix();
     translate(center.x, center.y);
@@ -108,8 +110,17 @@ class Label {
   }
 
   void walk() {
-    if (!frozen)
-      this.labelAngle += direction * speed;
+    if (!freezing) {
+      if (speed < maxSpeed) {
+        speed = min(speed + maxSpeed / 50, maxSpeed);
+      }
+    } else{
+      println(speed);
+      if ( speed > 0){
+        speed = max( speed - maxSpeed / 50, 0);
+      }
+    }
+    this.labelAngle += direction * speed;
     labelAngle = normaliseAngle(labelAngle);
   }
 }

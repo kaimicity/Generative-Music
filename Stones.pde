@@ -174,6 +174,7 @@ void init() {
   back = false;
   unbonding = false;
   eraseFlag = true;
+  freezing = false;
 
   currentPanel = "NONE";
 
@@ -199,17 +200,6 @@ void init() {
   ignoreTag = new SlideTag(0, "None", false, percussionIgnore);
   lightTag = new SlideTag(currentPercussion.getLowThreshold(), currentPercussion.getSoundName1(), true, percussionLight);
   heavyTag = new SlideTag(currentPercussion.getHighThreshold(), currentPercussion.getSoundName2(), true, percussionHeavy);
-  try {
-    indoorLight = lightSensor.getSensorValue();
-    println(indoorLight);
-    if (indoorLight < 0.25)
-      lightSwitch = false;
-    else
-      lightSwitch = true;
-  } 
-  catch(Exception e) {
-    println(e.toString());
-  }
 }
 
 boolean inTag1;
@@ -223,7 +213,22 @@ double lightValue;
 boolean eraseFlag;
 boolean lightSwitch;
 int shakingCounter;
+int coverTime;
+boolean freezing;
 void draw() {
+  if (indoorLight == 0) {  
+    try {
+      indoorLight = lightSensor.getSensorValue();
+      println(indoorLight);
+      if (indoorLight < 0.2)
+        lightSwitch = false;
+      else
+        lightSwitch = true;
+    } 
+    catch(Exception e) {
+      println(e.toString());
+    }
+  }
   background(whiteColor);
   drawRoulette();
   inClin = inClinch();
@@ -236,13 +241,21 @@ void draw() {
     if (!enter && !back) {
       try {
         lightValue = lightSensor.getSensorValue();
-        if (indoorLight - lightValue > 0.03 && eraseFlag) {
-          shakingCounter ++;
-          eraseFlag = false;
-          if (shakingCounter > 1 && bondedNumber > 0)
-            unbonding = true;
+        if (indoorLight - lightValue > 0.03 && !freezing) {
+          if (millis() - coverTime > 1000) {
+            freezing = true;
+            shakingCounter = 0;
+          }
+          if (eraseFlag) {
+            shakingCounter ++;
+            eraseFlag = false;
+            if (shakingCounter > 1 && bondedNumber > 0)
+              unbonding = true;
+          }
         } else if (indoorLight - lightValue < 0.03) {
+          coverTime = millis();
           eraseFlag = true;
+          freezing = false;
         }
       } 
       catch(Exception e) {
@@ -543,7 +556,7 @@ float lastVolumn;
 void drawSlideBar() {
   try {
     double gsv = soundSensor.getSensorValue();
-    if (!enter && ! back && millis() - lastReadTime >= 400 && gsv > 0.035 && gsv - 0.03 >= soundValue / 2 && abs((float)(lastReadValue - gsv)) >= 0.003) {
+    if (!enter && ! back && millis() - lastReadTime >= 500 && gsv > 0.035 ) {
       lastReadTime = millis();
       lastReadValue = gsv;
       soundValue = (float)gsv - 0.03;
