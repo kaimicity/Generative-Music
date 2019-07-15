@@ -2,8 +2,8 @@
 	"Percussion":[
 		{
 			"name": "Cajon",
-			"soundPath1": "Material/cajon.mp3",
-			"soundPath2": "Material/cajon_small.mp3",
+			"soundPath1": "Material/cajon_small.mp3",
+			"soundPath2": "Material/cajon.mp3",
 			"soundName1": "Light",
 			"soundName2": "Heavy"
 			
@@ -21,6 +21,17 @@
 			"soundPath2": "Material/cajon_small.mp3",
 			"soundName1": "Light2",
 			"soundName2": "Heavy2"
+		}
+	],
+	"Pluck":[
+		{
+			"name" : "Piano"
+		},
+		{
+			"name" : "Piano2"
+		},
+		{
+			"name" : "Piano3"
 		}
 	]
 }

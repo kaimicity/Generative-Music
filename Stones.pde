@@ -4,6 +4,7 @@ import com.phidget22.* ;
 static Minim minim ;
 
 PVector backButtonPosition;
+PVector freezeButtonPosition;
 PVector roulettePosition;
 PVector instructionPosition;
 PVector instrumentPosition;
@@ -78,6 +79,7 @@ VoltageInput lightSensor;
 
 Button backButton;
 Button clearAllButton;
+Button freezeButton;
 PercussionInstrument currentPercussion;
 SlideTag ignoreTag;
 SlideTag lightTag;
@@ -94,6 +96,7 @@ void setup() {
   instructionPosition = new PVector(width / 10, height / 10);
   instrumentPosition = new PVector(200 + width * 4 / 7, height * 7 / 20);
   backButtonPosition = new PVector(width / 10, height * 13 / 20);
+  freezeButtonPosition = new PVector(width / 10, height * 16 / 20);
   scrollPosition = new PVector(width / 10 - width / 50, height / 10 - height / 100);
   stonePosition = new PVector(200 + width * 4 / 7, height * 10 / 20);
 
@@ -138,6 +141,7 @@ void setup() {
 
   backButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "BACK");
   clearAllButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "CLEAR ALL");
+  freezeButton = new Button(freezeButtonPosition, backButtonWidth, backButtonHeight, "FREEZE");
 
   try {
     soundSensor = new VoltageInput();
@@ -207,6 +211,7 @@ boolean inTag2;
 boolean inButton1;
 boolean inButton2;
 boolean inBackButton;
+boolean inFreezeButton;
 boolean inClin;
 
 double lightValue;
@@ -238,6 +243,12 @@ void draw() {
   case "NONE":
     drawPanel();
     drawInstruction(panelOpacity);
+    inFreezeButton = freezeButton.isFocused();
+    if (mousePressed && inFreezeButton && !lightSwitch) {
+      freezing = true;
+    } else {
+      freezing = false;
+    }
     if (!enter && !back) {
       try {
         lightValue = lightSensor.getSensorValue();
@@ -262,8 +273,10 @@ void draw() {
         println(e.toString());
       }
     }
-    if (!lightSwitch)
+    if (!lightSwitch) {
       clearAllButton.draw(panelOpacity);
+      freezeButton.draw(panelOpacity);
+    }
     if (unbonding) {
       trackOpacity -= 2;
       if (trackOpacity <= 0) {
@@ -300,41 +313,16 @@ void draw() {
             currentPanel = Database.buttonMark[test];
         }
       }
-    } else if ((inClin || inBackButton) && !unbonding && !lightSwitch) 
+    } else if ((inClin || inBackButton || inFreezeButton) && !unbonding && !lightSwitch) 
       cursor(HAND);
     else
       cursor(ARROW);
     break;
   case "PERCUSSION":
-    if (enter) {
-      uiOpacity +=5;
-      if (uiOpacity >= 255) {
-        enter = false;
-        currentTrack.getLabel().setCreating(false);
-      }
-    } 
-    if (back) {
-      back();
-    }
-    drawInstruction(uiOpacity);
-    if (!enter && !back) {
-      try {
-        lightValue = lightSensor.getSensorValue();
-        if (indoorLight - lightValue > 0.03 && currentTrack.allNotesReady()) {
-          startBack();
-        }
-      } 
-      catch(Exception e) {
-        println(e.toString());
-      }
-    }
-    if (!lightSwitch)
-      backButton.draw(uiOpacity);
+    config();
     drawPercussion();
     inTag1 = lightTag.inTag();
     inTag2 = heavyTag.inTag();
-    inButton1 = inLeftSwitchButton();
-    inButton2 = inRightSwitchButton();
     switch(dragging) {
     case 0:
       if (!enter && !back) {
@@ -366,6 +354,11 @@ void draw() {
       }
       break;
     }
+    break;
+  case "PLUCK":
+    config();
+    drawPluk();
+    break;
   }
 }
 
@@ -478,6 +471,10 @@ void mountEnterFill(color c, int opa) {
   } else {
     fill(c);
   }
+}
+
+void drawPluk(){
+  
 }
 
 float tw;
@@ -693,4 +690,33 @@ float normaliseAngle(float angle) {
   else if (angle >= PI * 2)
     angle -= PI * 2;
   return angle;
+}
+
+void config() {
+  if (enter) {
+    uiOpacity +=5;
+    if (uiOpacity >= 255) {
+      enter = false;
+      currentTrack.getLabel().setCreating(false);
+    }
+  } 
+  if (back) {
+    back();
+  }
+  drawInstruction(uiOpacity);
+  if (!enter && !back) {
+    try {
+      lightValue = lightSensor.getSensorValue();
+      if (indoorLight - lightValue > 0.03 && currentTrack.allNotesReady()) {
+        startBack();
+      }
+    } 
+    catch(Exception e) {
+      println(e.toString());
+    }
+  }
+  if (!lightSwitch)
+    backButton.draw(uiOpacity);
+  inButton1 = inLeftSwitchButton();
+  inButton2 = inRightSwitchButton();
 }
