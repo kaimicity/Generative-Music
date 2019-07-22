@@ -10,7 +10,6 @@ class PercussionInstrument extends Instrument {
   
   int lowThreshold;
   int highThreshold;
-  int c;
 
   PercussionInstrument(String name, String soundPath1, String soundPath2, String name1, String name2) {
     this.name = name;
@@ -19,7 +18,6 @@ class PercussionInstrument extends Instrument {
     this.soundPath2 = soundPath2;
     this.soundName1 = name1;
     this.soundName2 = name2;
-    c = 0;
   }
   
   void initThreshold(){

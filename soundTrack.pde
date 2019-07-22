@@ -13,6 +13,7 @@ class SoundTrack {
   int leastMainLength = leastWholeLength * 2 / 3;
   int noteNumber;
   int direction;
+  boolean needActivate;
 
   SoundTrack(int i) {
     this.index = i;
@@ -21,6 +22,7 @@ class SoundTrack {
     this.mainLength = 0;
     noteNumber = 0;
     direct();
+    needActivate = false;
   }
 
   void direct() {
@@ -92,6 +94,17 @@ class SoundTrack {
       }
       myLabel.draw();
     }
+    if (needActivate && allNotesReady()) {
+      float noteSpeed = PI * 2 * 1000 / (preLength + mainLength) / frameRate;
+      for (Note n : myNotes) {
+        n.setStatus("RUN");
+        n.setSpeed(noteSpeed);
+        n.setDirection(this.direction);
+      }
+      myLabel.setSpeed(noteSpeed * ((float)Math.random() * 0.05 + 0.15));
+      myLabel.startWalking();
+      needActivate = false;
+    }
   }
 
   void register(Note n) {
@@ -119,16 +132,16 @@ class SoundTrack {
   }
 
   void activate() {
-    float noteSpeed = PI * 2 * 1000 / (preLength + mainLength) / frameRate;
-    println(preLength + " " + mainLength);
     if (allNotesReady()) {
+      float noteSpeed = PI * 2 * 1000 / (preLength + mainLength) / frameRate;
       for (Note n : myNotes) {
         n.setStatus("RUN");
         n.setSpeed(noteSpeed);
         n.setDirection(this.direction);
       }
-    }
-    myLabel.setSpeed(noteSpeed * ((float)Math.random() * 0.05 + 0.15));
-    myLabel.startWalking();
+      myLabel.setSpeed(noteSpeed * ((float)Math.random() * 0.05 + 0.15));
+      myLabel.startWalking();
+    } else
+      needActivate = true;
   }
 }

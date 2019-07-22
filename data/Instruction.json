@@ -1,4 +1,5 @@
 {
 	"NONE": "[Click] 3 buttons in the central panel to enter 3 modes",
-	"PERCUSSION": "[Click] arrows to switch between instruments\n[Drag] tags on the slide bar to set thresholds of 2 sounds\n[Make Voice] to generate sounds"
+	"PERCUSSION": "[Click] arrows to switch between instruments\n[Drag] tags on the slide bar to set thresholds of 2 sounds\n[Make Voice] to generate sounds",
+	"PLUCK": "[Click] arrows to switch between instruments"
 }

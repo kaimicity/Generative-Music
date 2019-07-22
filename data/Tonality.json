@@ -1,0 +1,122 @@
+[
+	{
+		"name":"C",
+		"type": "Major",
+		"syllables":["C", "D", "E", "F", "G", "A", "B"]
+	},
+	{
+		"name":"G",
+		"type": "Major",
+		"syllables":["G", "A", "B", "C2", "D2", "E2", "F#2"]
+	},
+	{
+		"name":"D",
+		"type": "Major",
+		"syllables":[ "D", "E", "F#", "G", "A", "B", "C#2"]
+	},
+	{
+		"name":"A",
+		"type": "Major",
+		"syllables":["A", "B", "C#2", "D2", "E2", "F#2", "G#2" ]
+	},
+	{
+		"name":"E",
+		"type": "Major",
+		"syllables":["E", "F#", "G#", "A", "B", "C#2", "D#2"]
+	},
+	{
+		"name":"B",
+		"type": "Major",
+		"syllables":["B", "C#2", "D#2", "E2", "F#2", "G#2", "A#2"]
+	},
+	{
+		"name":"#F",
+		"type": "Major",
+		"syllables":["F#", "G#", "A#", "B","C#2", "D#2", "F2"]
+	},
+	{
+		"name":"#C",
+		"type": "Major",
+		"syllables":["C#", "D#", "F", "F#", "G#", "A#", "C2"]
+	},
+	{
+		"name":"F",
+		"type": "Major",
+		"syllables":["F", "G", "A", "A#", "C2", "D2", "E2"]
+	},
+	{
+		"name":"♭B",
+		"type": "Major",
+		"syllables":["A#", "C2", "D2", "D#2", "F2", "G2", "A2"]
+	},
+	{
+		"name":"♭E",
+		"type": "Major",
+		"syllables":["D#", "F", "G", "G#", "A#", "C2", "D2"]
+	},
+	{
+		"name":"♭A",
+		"type": "Major",
+		"syllables":["G#", "A#", "C2", "C#2", "D#2", "F2", "G2"]
+	},
+	{
+		"name":"C",
+		"type": "Minor",
+		"syllables":["C", "D", "D#", "F", "G", "G#", "A#"]
+	},
+	{
+		"name":"G",
+		"type": "Minor",
+		"syllables":["G", "A", "A#", "C2", "D2", "D#2", "F2"]
+	},
+	{
+		"name":"D",
+		"type": "Minor",
+		"syllables":["D", "E", "F", "G", "A", "A#", "C2"]
+	}, 
+	{
+		"name":"A",
+		"type": "Minor",
+		"syllables":["A", "B", "C2", "D2", "E2", "F2", "G2"]
+	},
+	{
+		"name":"E",
+		"type": "Minor",
+		"syllables":["E", "F#", "G", "A", "B", "C2", "D2"]
+	},
+	{
+		"name":"B",
+		"type": "Minor",
+		"syllables":["B", "C#2", "D2", "E2", "F#2", "G2", "A2"]
+	},
+	{
+		"name":"#F",
+		"type": "Minor",
+		"syllables":["F#", "G#", "A", "B","C#2", "D2", "E2"]
+	},
+	{
+		"name":"#C",
+		"type": "Minor",
+		"syllables":["C#", "D#", "E", "F#", "G#", "A", "B"]
+	},
+	{
+		"name":"F",
+		"type": "Minor",
+		"syllables":["F", "G", "G#", "A#", "C2", "C#2", "D#2"]
+	},
+	{
+		"name":"♭B",
+		"type": "Major",
+		"syllables":["A#", "C2", "C#2", "D#2", "F2", "F#2", "G#2"]
+	},
+	{
+		"name":"♭E",
+		"type": "Major",
+		"syllables":["D#", "F", "F#", "G#", "A#", "B", "C#2"]
+	},
+	{
+		"name":"♭A",
+		"type": "Major",
+		"syllables":["G#", "A#", "B", "C#2", "D#2", "E2", "F#2"]
+	}
+]

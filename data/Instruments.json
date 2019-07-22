@@ -25,13 +25,91 @@
 	],
 	"Pluck":[
 		{
-			"name" : "Piano"
+			"name" : "Piano",
+			"paths" : [
+				{"name":"C", "path" : "Material/cajon.mp3"}, 
+				{"name":"C#", "path" : "Material/cajon.mp3"}, 
+				{"name":"D", "path" : "Material/cajon.mp3"}, 
+				{"name":"D#", "path" : "Material/cajon.mp3"}, 
+				{"name":"E", "path" : "Material/cajon.mp3"}, 
+				{"name":"F", "path" : "Material/cajon.mp3"}, 
+				{"name":"F#", "path" : "Material/cajon.mp3"}, 
+				{"name":"G", "path" : "Material/cajon.mp3"}, 
+				{"name":"G#", "path" : "Material/cajon.mp3"}, 
+				{"name":"A", "path" : "Material/cajon.mp3"}, 
+				{"name":"A#", "path" : "Material/cajon.mp3"}, 
+				{"name":"B", "path" : "Material/cajon.mp3"} ,
+				{"name":"C2", "path" : "Material/cajon.mp3"}, 
+				{"name":"C#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"D2", "path" : "Material/cajon.mp3"}, 
+				{"name":"D#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"E2", "path" : "Material/cajon.mp3"}, 
+				{"name":"F2", "path" : "Material/cajon.mp3"}, 
+				{"name":"F#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"G2", "path" : "Material/cajon.mp3"}, 
+				{"name":"G#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"A2", "path" : "Material/cajon.mp3"}, 
+				{"name":"A#2", "path" : "Material/cajon.mp3"}
+			
+			]
 		},
 		{
-			"name" : "Piano2"
+			"name" : "Piano2",
+			"paths" : [
+				{"name":"C", "path" : "Material/cajon.mp3"}, 
+				{"name":"C#", "path" : "Material/cajon.mp3"}, 
+				{"name":"D", "path" : "Material/cajon.mp3"}, 
+				{"name":"D#", "path" : "Material/cajon.mp3"}, 
+				{"name":"E", "path" : "Material/cajon.mp3"}, 
+				{"name":"F", "path" : "Material/cajon.mp3"}, 
+				{"name":"F#", "path" : "Material/cajon.mp3"}, 
+				{"name":"G", "path" : "Material/cajon.mp3"}, 
+				{"name":"G#", "path" : "Material/cajon.mp3"}, 
+				{"name":"A", "path" : "Material/cajon.mp3"}, 
+				{"name":"A#", "path" : "Material/cajon.mp3"}, 
+				{"name":"B", "path" : "Material/cajon.mp3"} ,
+				{"name":"C2", "path" : "Material/cajon.mp3"}, 
+				{"name":"C#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"D2", "path" : "Material/cajon.mp3"}, 
+				{"name":"D#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"E2", "path" : "Material/cajon.mp3"}, 
+				{"name":"F2", "path" : "Material/cajon.mp3"}, 
+				{"name":"F#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"G2", "path" : "Material/cajon.mp3"}, 
+				{"name":"G#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"A2", "path" : "Material/cajon.mp3"}, 
+				{"name":"A#2", "path" : "Material/cajon.mp3"}
+			
+			]
 		},
 		{
-			"name" : "Piano3"
+			"name" : "Piano3",
+			"paths" : [
+				{"name":"C", "path" : "Material/cajon.mp3"}, 
+				{"name":"C#", "path" : "Material/cajon.mp3"}, 
+				{"name":"D", "path" : "Material/cajon.mp3"}, 
+				{"name":"D#", "path" : "Material/cajon.mp3"}, 
+				{"name":"E", "path" : "Material/cajon.mp3"}, 
+				{"name":"F", "path" : "Material/cajon.mp3"}, 
+				{"name":"F#", "path" : "Material/cajon.mp3"}, 
+				{"name":"G", "path" : "Material/cajon.mp3"}, 
+				{"name":"G#", "path" : "Material/cajon.mp3"}, 
+				{"name":"A", "path" : "Material/cajon.mp3"}, 
+				{"name":"A#", "path" : "Material/cajon.mp3"}, 
+				{"name":"B", "path" : "Material/cajon.mp3"} ,
+				{"name":"C2", "path" : "Material/cajon.mp3"}, 
+				{"name":"C#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"D2", "path" : "Material/cajon.mp3"}, 
+				{"name":"D#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"E2", "path" : "Material/cajon.mp3"}, 
+				{"name":"F2", "path" : "Material/cajon.mp3"}, 
+				{"name":"F#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"G2", "path" : "Material/cajon.mp3"}, 
+				{"name":"G#2", "path" : "Material/cajon.mp3"}, 
+				{"name":"A2", "path" : "Material/cajon.mp3"}, 
+				{"name":"A#2", "path" : "Material/cajon.mp3"}
+			
+			]
 		}
 	]
 }

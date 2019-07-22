@@ -115,7 +115,6 @@ class Label {
         speed = min(speed + maxSpeed / 50, maxSpeed);
       }
     } else{
-      println(speed);
       if ( speed > 0){
         speed = max( speed - maxSpeed / 50, 0);
       }

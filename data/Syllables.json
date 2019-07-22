@@ -1,0 +1,51 @@
+[
+	{
+		"name" : "C",
+		"value": 0
+	},
+	{
+		"name" : "C#",
+		"value": 0.0909
+	},
+	{
+		"name" : "D",
+		"value": 0.1818
+	},
+	{
+		"name" : "D#",
+		"value": 0.2727
+	},
+	{
+		"name" : "E",
+		"value": 0.3636
+	},
+	{
+		"name" : "F",
+		"value": 0.4545
+	},
+	{
+		"name" : "F#",
+		"value": 0.5454
+	},
+	{
+		"name" : "G",
+		"value": 0.6363
+	},
+	{
+		"name" : "G#",
+		"value": 0.7272
+	},
+	{
+		"name" : "A",
+		"value": 0.8181
+	},
+	{
+		"name" : "A#",
+		"value": 0.9090
+	},
+	{
+		"name" : "B",
+		"value": 1.0
+	}
+	
+]
