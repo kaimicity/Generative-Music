@@ -45,17 +45,17 @@
 		"syllables":["F", "G", "A", "A#", "C2", "D2", "E2"]
 	},
 	{
-		"name":"♭B",
+		"name":"#A",
 		"type": "Major",
 		"syllables":["A#", "C2", "D2", "D#2", "F2", "G2", "A2"]
 	},
 	{
-		"name":"♭E",
+		"name":"#D",
 		"type": "Major",
 		"syllables":["D#", "F", "G", "G#", "A#", "C2", "D2"]
 	},
 	{
-		"name":"♭A",
+		"name":"#G",
 		"type": "Major",
 		"syllables":["G#", "A#", "C2", "C#2", "D#2", "F2", "G2"]
 	},
@@ -105,17 +105,17 @@
 		"syllables":["F", "G", "G#", "A#", "C2", "C#2", "D#2"]
 	},
 	{
-		"name":"♭B",
+		"name":"#A",
 		"type": "Major",
 		"syllables":["A#", "C2", "C#2", "D#2", "F2", "F#2", "G#2"]
 	},
 	{
-		"name":"♭E",
+		"name":"#D",
 		"type": "Major",
 		"syllables":["D#", "F", "F#", "G#", "A#", "B", "C#2"]
 	},
 	{
-		"name":"♭A",
+		"name":"#G",
 		"type": "Major",
 		"syllables":["G#", "A#", "B", "C#2", "D#2", "E2", "F#2"]
 	}

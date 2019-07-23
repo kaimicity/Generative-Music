@@ -1,5 +1,6 @@
- import ddf.minim.*;
+import ddf.minim.*;
 import com.phidget22.* ;
+import processing.pdf.*;
 
 static Minim minim ;
 
@@ -11,6 +12,7 @@ PVector instrumentPosition;
 PVector knobPosition;
 PVector scrollPosition;
 PVector stonePosition;
+PVector tonalityPosition;
 
 float backButtonWidth;
 float backButtonHeight;
@@ -36,7 +38,8 @@ float thresholdInterval;
 float maxInterval;
 float timeTagX;
 float rotationValue;
-//float 
+float tonalityWidth;
+float tonalityHeight;
 
 double indoorLight;
 
@@ -60,6 +63,7 @@ int uiOpacity;
 int trackOpacity;
 int lightRefreshCounter;
 int timeBarHeight;
+int tonalityTimeStamp;
 boolean adding;
 
 color unbondSoundtrack;
@@ -95,6 +99,7 @@ static JSONArray tonalities;
 VoltageInput soundSensor;
 VoltageInput lightSensor;
 VoltageRatioInput rotationSensor;
+VoltageInput tempratureSensor;
 
 Button backButton;
 Button clearAllButton;
@@ -105,7 +110,7 @@ SlideTag ignoreTag;
 SlideTag lightTag;
 SlideTag heavyTag;
 SoundTrack currentTrack;
-Tonality natureTonality;
+static Tonality natureTonality;
 Tonality currentTonality;
 
 void setup() {
@@ -122,6 +127,7 @@ void setup() {
   scrollPosition = new PVector(width / 10 - width / 50, height / 10 - height / 100);
   stonePosition = new PVector(200 + width * 4 / 7, height * 10 / 20);
   knobPosition = new PVector(200 + width * 4 / 7, height + 300);
+  tonalityPosition = new PVector( 200 + width * 5.8 / 7, height / 21);
 
   backButtonWidth = width * 2 / 7;
   backButtonHeight = height / 10;
@@ -137,6 +143,8 @@ void setup() {
   slideBarY = height + 25;
   stoneR = height * 1.5 / 20;
   startR = stoneR;
+  tonalityWidth = width * 2 / 14;
+  tonalityHeight = height * 1 / 14;
 
   arrowTik = 0;
   numberOfRing = 5;
@@ -167,14 +175,14 @@ void setup() {
 
   instruments = loadJSONObject("Instruments.json");
   instructions = loadJSONObject("Instruction.json");
-  syllables = loadJSONArray("Syllables.json");
+  syllables = loadJSONArray("Syllables2.json");
   tonalities = loadJSONArray("Tonality.json");
 
   backButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "BACK");
   clearAllButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "CLEAR ALL");
   freezeButton = new Button(freezeButtonPosition, backButtonWidth, backButtonHeight, "FREEZE");
-  
-  
+
+
   try {
     soundSensor = new VoltageInput();
     soundSensor.setDeviceSerialNumber(274066);     
@@ -187,13 +195,16 @@ void setup() {
     rotationSensor = new VoltageRatioInput();
     rotationSensor.setDeviceSerialNumber(274066); 
     rotationSensor.setChannel(6);
-    rotationSensor.open();  
+    rotationSensor.open();
+    tempratureSensor = new VoltageInput();
+    tempratureSensor.setDeviceSerialNumber(274066);
+    tempratureSensor.setChannel(7);
+    tempratureSensor.open();
   } 
   catch (Exception e) {    
     System.out.println(e);
   }
   Database.init();
-  makeNatureTonality();
   natureSyllables = natureTonality.getMySyllables();
   init();
 }
@@ -223,6 +234,7 @@ void init() {
   eraseFlag = true;
   freezing = false;
   started = false;
+  tonalityLocked = false;
 
   currentPanel = "NONE";
 
@@ -246,19 +258,11 @@ void init() {
   currentInstruments = new ArrayList<Instrument>();
   currentInstruments.add(currentPercussion);
   currentInstruments.add(currentPluck);
+  currentTonality = natureTonality;
 
   ignoreTag = new SlideTag(0, "None", false, percussionIgnore);
   lightTag = new SlideTag(currentPercussion.getLowThreshold(), currentPercussion.getSoundName1(), true, percussionLight);
   heavyTag = new SlideTag(currentPercussion.getHighThreshold(), currentPercussion.getSoundName2(), true, percussionHeavy);
-}
-
-void makeNatureTonality(){
-  JSONObject nt = tonalities.getJSONObject(0);
-  JSONArray syllableList = nt.getJSONArray("syllables");
-  ArrayList<Syllable> mySyllables = new ArrayList<Syllable>();
-  for(int i = 0; i < syllableList.size(); i++){
-    mySyllables.add(Database.getSyllable(syllableList.getString(i)));
-  }
-  natureTonality = new Tonality(nt.getString("name"), mySyllables); 
-  currentTonality = natureTonality;
+  
+  
 }

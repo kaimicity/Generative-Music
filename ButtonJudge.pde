@@ -20,3 +20,10 @@ boolean inClinch() {
   else
     return false;
 }
+
+boolean inTonality() {
+  if (mouseX > tonalityPosition.x && mouseX < tonalityPosition.x + tonalityWidth && mouseY > tonalityPosition.y && mouseY < tonalityPosition.y + tonalityHeight)
+    return true;
+  else
+    return false;
+}

@@ -3,6 +3,14 @@ void mouseReleased() {
   if (inClinch()) {
     showInstruction = !showInstruction;
   }
+  if(inTonality()){
+    if(!tonalityLocked){
+      tonalityLocked = true;
+    }else{
+      tonalityLocked = false;
+      tonalityTimeStamp = millis();
+    }
+  }
 
   switch(currentPanel) {
   case "NONE":

@@ -34,3 +34,13 @@ float getDistance(float x1, float y1, float x2, float y2) {
   PVector dis = new PVector(x1 - x2, y1 - y2) ;
   return dis.mag() ;
 }
+
+void resetTonality(){
+  int tonalityIndex = (int)(Math.random() * Database.tonalityMark.length);
+  if(isMajor){
+    currentTonality = Database.majors.get(Database.tonalityMark[tonalityIndex]);
+  } else{
+    currentTonality = Database.minors.get(Database.tonalityMark[tonalityIndex]);
+  }
+  
+}

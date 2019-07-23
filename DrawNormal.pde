@@ -66,6 +66,32 @@ void drawPanel() {
   popMatrix();
 }
 
+void drawTonality() {
+  textAlign(CENTER, CENTER);
+  textMode(SHAPE);
+  textSize(30);
+  String tona = "MAJOR C";
+  if (isMajor) {
+    fill(normalStroke);
+    tona = "MAJOR " + currentTonality.getName();
+  } else {
+    fill(normalStroke, 100);
+    tona = "MINOR " + currentTonality.getName();
+  }
+  text(tona, tonalityPosition.x + tonalityWidth, tonalityPosition.y + tonalityHeight / 2);
+  if (tonalityLocked) {
+    noFill();
+    stroke(normalStroke);
+    strokeWeight(panelStrokeWidth / 2);
+    rect(tonalityPosition.x, tonalityPosition.y, tonalityWidth, tonalityHeight);
+  } else {
+    fill(normalStroke, 100);
+    noStroke();
+    rect(tonalityPosition.x + tonalityWidth - textWidth(tona), tonalityPosition.y + tonalityHeight - 2, textWidth(tona), 2);
+    fill(normalStroke);
+    rect(tonalityPosition.x + tonalityWidth - textWidth(tona), tonalityPosition.y + tonalityHeight - 2, textWidth(tona) * (millis() - tonalityTimeStamp) / 120000, 2);
+  }
+}
 
 boolean inTag1;
 boolean inTag2;
@@ -76,6 +102,7 @@ boolean inFreezeButton;
 boolean inTimeTag;
 boolean inClin;
 boolean inStart;
+boolean inTonality;
 
 double lightValue;
 boolean eraseFlag;
@@ -83,24 +110,41 @@ boolean lightSwitch;
 int shakingCounter;
 int coverTime;
 boolean freezing;
+double temprature;
+boolean isMajor;
+boolean tonalityLocked;
+
 void draw() {
   if (indoorLight == 0) {  
     try {
       indoorLight = lightSensor.getSensorValue();
+      temprature = tempratureSensor.getSensorValue();
       //println(indoorLight);
       if (indoorLight < 0.2)
         lightSwitch = false;
       else
         lightSwitch = true;
+      if (temprature > 26)
+        isMajor = false;
+      else
+        isMajor = true;
+      tonalityTimeStamp = millis();
+      resetTonality();
     } 
     catch(Exception e) {
       println(e.toString());
     }
   }
+  if (!tonalityLocked && millis() - tonalityTimeStamp >= 120000) {
+    resetTonality();
+    tonalityTimeStamp = millis();
+  }
   background(whiteColor);
   drawRoulette();
+  drawTonality();
   inClin = inClinch();
   inBackButton = backButton.isFocused();
+  inTonality = inTonality();
   switch(currentPanel) {
   case "NONE":
     drawPanel();
@@ -176,7 +220,7 @@ void draw() {
             currentPanel = Database.buttonMark[test];
         }
       }
-    } else if ((inClin || inBackButton || inFreezeButton) && !unbonding && !lightSwitch) 
+    } else if ((((inBackButton || inFreezeButton ) && !unbonding && !lightSwitch)) || inClin || inTonality)
       cursor(HAND);
     else
       cursor(ARROW);
@@ -191,7 +235,7 @@ void draw() {
       if (!enter && !back) {
         if (inTag1 || inTag2)
           cursor(MOVE);
-        else if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton))
+        else if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton) || inTonality)
           cursor(HAND);
         else 
         cursor(ARROW);
@@ -225,7 +269,7 @@ void draw() {
     inStart = inStart();
     if (dragging == 0) {
       if (!enter && !back) {
-        if (inButton1 || inButton2 || inClin || inStart || (!lightSwitch && inBackButton))
+        if (inButton1 || inButton2 || inClin || inStart || (!lightSwitch && inBackButton) || inTonality)
           cursor(HAND);
         else if (inTimeTag)
           cursor(MOVE);

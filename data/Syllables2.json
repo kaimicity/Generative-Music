@@ -48,40 +48,52 @@
     "value": 1.0
   },
   {
-    "name": "C2"
+    "name": "C2",
+    "value": -1
   },
   {
-    "name": "C#2"
+    "name": "C#2",
+    "value": -1
   },
   {
-    "name": "D2"
+    "name": "D2",
+    "value": -1
   },
   {
-    "name": "D#2"
+    "name": "D#2",
+    "value": -1
   },
   {
-    "name": "E2"
+    "name": "E2",
+    "value": -1
   },
   {
-    "name": "F2"
+    "name": "F2",
+    "value": -1
   },
   {
-    "name": "F#2"
+    "name": "F#2",
+    "value": -1
   },
   {
-    "name": "G2"
+    "name": "G2",
+    "value": -1
   },
   {
-    "name": "G#2"
+    "name": "G#2",
+    "value": -1
   },
   {
-    "name": "A2"
+    "name": "A2",
+    "value": -1
   },
   {
-    "name": "A#2"
+    "name": "A#2",
+    "value": -1
   },
   {
-    "name": "B2"
+    "name": "B2",
+    "value": -1
   }
 
 ]
