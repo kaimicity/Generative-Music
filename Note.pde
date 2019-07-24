@@ -46,7 +46,15 @@ abstract class Note {
       return false;
   }
 
-  abstract void play();
+  void play() {
+    if(currentPanel.equals("PERCUSSION")){
+      audio.setGain( - 20);
+    } else{
+      audio.setGain(0);
+    }
+    audio.rewind();
+    audio.play();
+  }
   
   
   void draw() {

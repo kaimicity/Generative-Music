@@ -12,16 +12,16 @@ class PluckNote extends Note{
     this.type = "PLUCK";
     naturalSyllable = natureTonality.getSyllableIndex(slb);
     setColor();
+    resetAudio();
   }
   
   void resetAudio(){
-    //this.audio = currentTonality.getMySyllables().get(i);
+    String mySyllableName = currentTonality.getMySyllables().get(naturalSyllable).getName();
+    this.audio = ((PluckInstrument) tracks.get(this.trackIndex).getInstrument()).getPlayer(mySyllableName);
   }
   
   void setColor(){
     myColor = natureTonality.getMySyllables().get(naturalSyllable).getColor();  
   }
   
-  void play(){
-  }
 }

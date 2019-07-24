@@ -24,13 +24,5 @@ class PercussionNote extends Note {
     return this.light;
   }
 
-  void play() {
-    if(currentPanel.equals("PERCUSSION")){
-      audio.setGain( - 20);
-    } else{
-      audio.setGain(0);
-    }
-    audio.rewind();
-    audio.play();
-  }
+  
 }

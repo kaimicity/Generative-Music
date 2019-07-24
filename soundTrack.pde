@@ -144,4 +144,12 @@ class SoundTrack {
     } else
       needActivate = true;
   }
+
+  void allNotesResetAudio() {
+    if (this.instrument.getType().equals("PLUCK")) {
+      for (Note n : myNotes) {
+        ((PluckNote)n).resetAudio();
+      }
+    }
+  }
 }

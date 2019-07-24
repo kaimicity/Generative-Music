@@ -42,5 +42,8 @@ void resetTonality(){
   } else{
     currentTonality = Database.minors.get(Database.tonalityMark[tonalityIndex]);
   }
-  
+  for(SoundTrack st: tracks){
+    if(st.isBonded())
+      st.allNotesResetAudio();
+  }
 }

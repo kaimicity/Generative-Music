@@ -1,114 +1,340 @@
 {
-	"Percussion":[
-		{
-			"name": "Cajon",
-			"soundPath1": "Material/cajon_small.mp3",
-			"soundPath2": "Material/cajon.mp3",
-			"soundName1": "Light",
-			"soundName2": "Heavy"
-			
-		},
-		{
-			"name": "Taiko",
-			"soundPath1": "Material/cajon.mp3",
-			"soundPath2": "Material/cajon_small.mp3",
-			"soundName1": "Light1",
-			"soundName2": "Heavy1"
-		},
-		{
-			"name": "Drums ",
-			"soundPath1": "Material/cajon.mp3",
-			"soundPath2": "Material/cajon_small.mp3",
-			"soundName1": "Light2",
-			"soundName2": "Heavy2"
-		}
-	],
+  "Percussion": [
+    {
+      "name": "Cajon",
+      "soundPath1": "Material/percussion/cajon/cajon_small.mp3",
+      "soundPath2": "Material/percussion/cajon/cajon.mp3",
+      "soundName1": "Light",
+      "soundName2": "Heavy"
+
+    },
+    {
+      "name": "Taiko",
+      "soundPath1": "Material/percussion/taiko/taiko_small.mp3",
+      "soundPath2": "Material/percussion/taiko/taiko.mp3",
+      "soundName1": "Light",
+      "soundName2": "Heavy"
+    },
+    {
+      "name": "Brooklyn",
+      "soundPath1": "Material/percussion/Brooklyn/Brooklyn_small.mp3",
+      "soundPath2": "Material/percussion/Brooklyn/Brooklyn.mp3",
+      "soundName1": "Light",
+      "soundName2": "Heavy"
+    },
+    {
+      "name": "Latin",
+      "soundPath1": "Material/percussion/Latin/latin_clap.mp3",
+      "soundPath2": "Material/percussion/Latin/latin_pat.mp3",
+      "soundName1": "Clap",
+      "soundName2": "Pat"
+    },
+    {
+      "name": "Timbrel",
+      "soundPath1": "Material/percussion/timbrel/timbrel_small.mp3",
+      "soundPath2": "Material/percussion/timbrel/timbrel.mp3",
+      "soundName1": "Light",
+      "soundName2": "Heavy"
+    },
+    {
+      "name": "Hands",
+      "soundPath1": "Material/percussion/hands/hands_snap.mp3",
+      "soundPath2": "Material/percussion/hands/hands_clap.mp3",
+      "soundName1": "Snap",
+      "soundName2": "Clap"
+    }
+  ],
 	"Pluck":[
 		{
 			"name" : "Piano",
 			"paths" : [
-				{"name":"C", "path" : "Material/cajon.mp3"}, 
-				{"name":"C#", "path" : "Material/cajon.mp3"}, 
-				{"name":"D", "path" : "Material/cajon.mp3"}, 
-				{"name":"D#", "path" : "Material/cajon.mp3"}, 
-				{"name":"E", "path" : "Material/cajon.mp3"}, 
-				{"name":"F", "path" : "Material/cajon.mp3"}, 
-				{"name":"F#", "path" : "Material/cajon.mp3"}, 
-				{"name":"G", "path" : "Material/cajon.mp3"}, 
-				{"name":"G#", "path" : "Material/cajon.mp3"}, 
-				{"name":"A", "path" : "Material/cajon.mp3"}, 
-				{"name":"A#", "path" : "Material/cajon.mp3"}, 
-				{"name":"B", "path" : "Material/cajon.mp3"} ,
-				{"name":"C2", "path" : "Material/cajon.mp3"}, 
-				{"name":"C#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"D2", "path" : "Material/cajon.mp3"}, 
-				{"name":"D#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"E2", "path" : "Material/cajon.mp3"}, 
-				{"name":"F2", "path" : "Material/cajon.mp3"}, 
-				{"name":"F#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"G2", "path" : "Material/cajon.mp3"}, 
-				{"name":"G#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"A2", "path" : "Material/cajon.mp3"}, 
-				{"name":"A#2", "path" : "Material/cajon.mp3"}
+        {
+          "name": "C",
+          "path": "Material/pluck/piano/C.mp3"
+        },
+        {
+          "name": "C#",
+          "path": "Material/pluck/piano/C#.mp3"
+        },
+        {
+          "name": "D",
+          "path": "Material/pluck/piano/D.mp3"
+        },
+        {
+          "name": "D#",
+          "path": "Material/pluck/piano/D#.mp3"
+        },
+        {
+          "name": "E",
+          "path": "Material/pluck/piano/E.mp3"
+        },
+        {
+          "name": "F",
+          "path": "Material/pluck/piano/F.mp3"
+        },
+        {
+          "name": "F#",
+          "path": "Material/pluck/piano/F#.mp3"
+        },
+        {
+          "name": "G",
+          "path": "Material/pluck/piano/G.mp3"
+        },
+        {
+          "name": "G#",
+          "path": "Material/pluck/piano/G#.mp3"
+        },
+        {
+          "name": "A",
+          "path": "Material/pluck/piano/A.mp3"
+        },
+        {
+          "name": "A#",
+          "path": "Material/pluck/piano/A#.mp3"
+        },
+        {
+          "name": "B",
+          "path": "Material/pluck/piano/B.mp3"
+        } ,
+        {
+          "name": "C2",
+          "path": "Material/pluck/piano/C2.mp3"
+        },
+        {
+          "name": "C#2",
+          "path": "Material/pluck/piano/C#2.mp3"
+        },
+        {
+          "name": "D2",
+          "path": "Material/pluck/piano/D2.mp3"
+        },
+        {
+          "name": "D#2",
+          "path": "Material/pluck/piano/D#2.mp3"
+        },
+        {
+          "name": "E2",
+          "path": "Material/pluck/piano/E2.mp3"
+        },
+        {
+          "name": "F2",
+          "path": "Material/pluck/piano/F2.mp3"
+        },
+        {
+          "name": "F#2",
+          "path": "Material/pluck/piano/F#2.mp3"
+        },
+        {
+          "name": "G2",
+          "path": "Material/pluck/piano/G2.mp3"
+        },
+        {
+          "name": "G#2",
+          "path": "Material/pluck/piano/G#2.mp3"
+        },
+        {
+          "name": "A2",
+          "path": "Material/pluck/piano/A2.mp3"
+        },
+        {
+          "name": "A#2",
+          "path": "Material/pluck/piano/A#2.mp3"
+        }
 			
 			]
 		},
 		{
-			"name" : "Piano2",
+			"name" : "Zheng",
 			"paths" : [
-				{"name":"C", "path" : "Material/cajon.mp3"}, 
-				{"name":"C#", "path" : "Material/cajon.mp3"}, 
-				{"name":"D", "path" : "Material/cajon.mp3"}, 
-				{"name":"D#", "path" : "Material/cajon.mp3"}, 
-				{"name":"E", "path" : "Material/cajon.mp3"}, 
-				{"name":"F", "path" : "Material/cajon.mp3"}, 
-				{"name":"F#", "path" : "Material/cajon.mp3"}, 
-				{"name":"G", "path" : "Material/cajon.mp3"}, 
-				{"name":"G#", "path" : "Material/cajon.mp3"}, 
-				{"name":"A", "path" : "Material/cajon.mp3"}, 
-				{"name":"A#", "path" : "Material/cajon.mp3"}, 
-				{"name":"B", "path" : "Material/cajon.mp3"} ,
-				{"name":"C2", "path" : "Material/cajon.mp3"}, 
-				{"name":"C#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"D2", "path" : "Material/cajon.mp3"}, 
-				{"name":"D#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"E2", "path" : "Material/cajon.mp3"}, 
-				{"name":"F2", "path" : "Material/cajon.mp3"}, 
-				{"name":"F#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"G2", "path" : "Material/cajon.mp3"}, 
-				{"name":"G#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"A2", "path" : "Material/cajon.mp3"}, 
-				{"name":"A#2", "path" : "Material/cajon.mp3"}
-			
+				{
+          "name": "C",
+          "path": "Material/pluck/zheng/C.mp3"
+        },
+        {
+          "name": "C#",
+          "path": "Material/pluck/zheng/C#.mp3"
+        },
+        {
+          "name": "D",
+          "path": "Material/pluck/zheng/D.mp3"
+        },
+        {
+          "name": "D#",
+          "path": "Material/pluck/zheng/D#.mp3"
+        },
+        {
+          "name": "E",
+          "path": "Material/pluck/zheng/E.mp3"
+        },
+        {
+          "name": "F",
+          "path": "Material/pluck/zheng/F.mp3"
+        },
+        {
+          "name": "F#",
+          "path": "Material/pluck/zheng/F#.mp3"
+        },
+        {
+          "name": "G",
+          "path": "Material/pluck/zheng/G.mp3"
+        },
+        {
+          "name": "G#",
+          "path": "Material/pluck/zheng/G#.mp3"
+        },
+        {
+          "name": "A",
+          "path": "Material/pluck/zheng/A.mp3"
+        },
+        {
+          "name": "A#",
+          "path": "Material/pluck/zheng/A#.mp3"
+        },
+        {
+          "name": "B",
+          "path": "Material/pluck/zheng/B.mp3"
+        } ,
+        {
+          "name": "C2",
+          "path": "Material/pluck/zheng/C2.mp3"
+        },
+        {
+          "name": "C#2",
+          "path": "Material/pluck/zheng/C#2.mp3"
+        },
+        {
+          "name": "D2",
+          "path": "Material/pluck/zheng/D2.mp3"
+        },
+        {
+          "name": "D#2",
+          "path": "Material/pluck/zheng/D#2.mp3"
+        },
+        {
+          "name": "E2",
+          "path": "Material/pluck/zheng/E2.mp3"
+        },
+        {
+          "name": "F2",
+          "path": "Material/pluck/zheng/F2.mp3"
+        },
+        {
+          "name": "F#2",
+          "path": "Material/pluck/zheng/F#2.mp3"
+        },
+        {
+          "name": "G2",
+          "path": "Material/pluck/zheng/G2.mp3"
+        },
+        {
+          "name": "G#2",
+          "path": "Material/pluck/zheng/G#2.mp3"
+        },
+        {
+          "name": "A2",
+          "path": "Material/pluck/zheng/A2.mp3"
+        },
+        {
+          "name": "A#2",
+          "path": "Material/pluck/zheng/A#2.mp3"
+        }
 			]
 		},
 		{
-			"name" : "Piano3",
+			"name" : "Guitar",
 			"paths" : [
-				{"name":"C", "path" : "Material/cajon.mp3"}, 
-				{"name":"C#", "path" : "Material/cajon.mp3"}, 
-				{"name":"D", "path" : "Material/cajon.mp3"}, 
-				{"name":"D#", "path" : "Material/cajon.mp3"}, 
-				{"name":"E", "path" : "Material/cajon.mp3"}, 
-				{"name":"F", "path" : "Material/cajon.mp3"}, 
-				{"name":"F#", "path" : "Material/cajon.mp3"}, 
-				{"name":"G", "path" : "Material/cajon.mp3"}, 
-				{"name":"G#", "path" : "Material/cajon.mp3"}, 
-				{"name":"A", "path" : "Material/cajon.mp3"}, 
-				{"name":"A#", "path" : "Material/cajon.mp3"}, 
-				{"name":"B", "path" : "Material/cajon.mp3"} ,
-				{"name":"C2", "path" : "Material/cajon.mp3"}, 
-				{"name":"C#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"D2", "path" : "Material/cajon.mp3"}, 
-				{"name":"D#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"E2", "path" : "Material/cajon.mp3"}, 
-				{"name":"F2", "path" : "Material/cajon.mp3"}, 
-				{"name":"F#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"G2", "path" : "Material/cajon.mp3"}, 
-				{"name":"G#2", "path" : "Material/cajon.mp3"}, 
-				{"name":"A2", "path" : "Material/cajon.mp3"}, 
-				{"name":"A#2", "path" : "Material/cajon.mp3"}
-			
+				{
+          "name": "C",
+          "path": "Material/pluck/guitar/C.mp3"
+        },
+        {
+          "name": "C#",
+          "path": "Material/pluck/guitar/C#.mp3"
+        },
+        {
+          "name": "D",
+          "path": "Material/pluck/guitar/D.mp3"
+        },
+        {
+          "name": "D#",
+          "path": "Material/pluck/guitar/D#.mp3"
+        },
+        {
+          "name": "E",
+          "path": "Material/pluck/guitar/E.mp3"
+        },
+        {
+          "name": "F",
+          "path": "Material/pluck/guitar/F.mp3"
+        },
+        {
+          "name": "F#",
+          "path": "Material/pluck/guitar/F#.mp3"
+        },
+        {
+          "name": "G",
+          "path": "Material/pluck/guitar/G.mp3"
+        },
+        {
+          "name": "G#",
+          "path": "Material/pluck/guitar/G#.mp3"
+        },
+        {
+          "name": "A",
+          "path": "Material/pluck/guitar/A.mp3"
+        },
+        {
+          "name": "A#",
+          "path": "Material/pluck/guitar/A#.mp3"
+        },
+        {
+          "name": "B",
+          "path": "Material/pluck/guitar/B.mp3"
+        } ,
+        {
+          "name": "C2",
+          "path": "Material/pluck/guitar/C2.mp3"
+        },
+        {
+          "name": "C#2",
+          "path": "Material/pluck/guitar/C#2.mp3"
+        },
+        {
+          "name": "D2",
+          "path": "Material/pluck/guitar/D2.mp3"
+        },
+        {
+          "name": "D#2",
+          "path": "Material/pluck/guitar/D#2.mp3"
+        },
+        {
+          "name": "E2",
+          "path": "Material/pluck/guitar/E2.mp3"
+        },
+        {
+          "name": "F2",
+          "path": "Material/pluck/guitar/F2.mp3"
+        },
+        {
+          "name": "F#2",
+          "path": "Material/pluck/guitar/F#2.mp3"
+        },
+        {
+          "name": "G2",
+          "path": "Material/pluck/guitar/G2.mp3"
+        },
+        {
+          "name": "G#2",
+          "path": "Material/pluck/guitar/G#2.mp3"
+        },
+        {
+          "name": "A2",
+          "path": "Material/pluck/guitar/A2.mp3"
+        },
+        {
+          "name": "A#2",
+          "path": "Material/pluck/guitar/A#2.mp3"
+        }
 			]
 		}
 	]

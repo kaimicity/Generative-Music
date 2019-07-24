@@ -1,6 +1,7 @@
 class Instrument{
   String name;
   PFont myFont;
+  String type;
   
   String getName(){
     return this.name;
@@ -9,6 +10,10 @@ class Instrument{
   
   PFont getMyFont(){
     return myFont;
+  }
+  
+  String getType(){
+    return  this.type;
   }
   
 }

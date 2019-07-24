@@ -67,9 +67,10 @@ void drawPanel() {
 }
 
 void drawTonality() {
-  textAlign(CENTER, CENTER);
+  textAlign(RIGHT, CENTER);
   textMode(SHAPE);
   textSize(30);
+  textFont(nameFont);
   String tona = "MAJOR C";
   if (isMajor) {
     fill(normalStroke);

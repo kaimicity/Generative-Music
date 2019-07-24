@@ -18,6 +18,7 @@ class PercussionInstrument extends Instrument {
     this.soundPath2 = soundPath2;
     this.soundName1 = name1;
     this.soundName2 = name2;
+    this.type = "PERCUSSION";
   }
   
   void initThreshold(){
