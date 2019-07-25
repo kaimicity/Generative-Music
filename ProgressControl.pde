@@ -41,7 +41,7 @@ void config() {
       }
     } 
     catch(Exception e) {
-      println(e.toString());
+      //println(e.toString());
     }
   }
   if (!lightSwitch)

@@ -1,4 +1,4 @@
-
+String tempUi;
 void mouseReleased() {
   if (inClinch()) {
     showInstruction = !showInstruction;
@@ -16,6 +16,7 @@ void mouseReleased() {
   case "NONE":
     if (test != -1 && !unbonding) {
       enter = true;
+      tempUi = Database.buttonMark[test];
       currentTrack = tracks.get(toBond);
       currentTrack.bond(currentInstruments.get(test));
       bondedNumber ++;

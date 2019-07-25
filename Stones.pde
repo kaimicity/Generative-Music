@@ -202,7 +202,7 @@ void setup() {
     tempratureSensor.open();
   } 
   catch (Exception e) {    
-    System.out.println(e);
+    //System.out.println(e);
   }
   Database.init();
   natureSyllables = natureTonality.getMySyllables();
@@ -226,6 +226,7 @@ void init() {
   thresholdInterval = 1.0;
   maxInterval = 2.0;
   timeTagX = 0.375;
+  indoorLight = 0;
 
   showInstruction = true;
   enter = false;

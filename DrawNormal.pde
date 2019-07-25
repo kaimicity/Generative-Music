@@ -68,7 +68,7 @@ void drawPanel() {
 
 void drawTonality() {
   textAlign(RIGHT, CENTER);
-  textMode(SHAPE);
+  //textMode(SHAPE);
   textSize(30);
   textFont(nameFont);
   String tona = "MAJOR C";
@@ -116,7 +116,7 @@ boolean isMajor;
 boolean tonalityLocked;
 
 void draw() {
-  if (indoorLight == 0) {  
+  if (indoorLight == 0.0) {  
     try {
       indoorLight = lightSensor.getSensorValue();
       temprature = tempratureSensor.getSensorValue();
@@ -129,12 +129,13 @@ void draw() {
         isMajor = false;
       else
         isMajor = true;
-      tonalityTimeStamp = millis();
-      resetTonality();
     } 
     catch(Exception e) {
-      println(e.toString());
+      //println(e.toString());
+      indoorLight = -1;
     }
+    tonalityTimeStamp = millis();
+    resetTonality();
   }
   if (!tonalityLocked && millis() - tonalityTimeStamp >= 120000) {
     resetTonality();
@@ -178,7 +179,7 @@ void draw() {
         }
       } 
       catch(Exception e) {
-        println(e.toString());
+        //println(e.toString());
       }
     }
     if (!lightSwitch && bondedNumber > 0 && !enter) {
@@ -218,7 +219,7 @@ void draw() {
         if (enter && panelOpacity > 0) {
           panelOpacity -= 5;
           if (panelOpacity <= 0)
-            currentPanel = Database.buttonMark[test];
+            currentPanel = tempUi;
         }
       }
     } else if ((((inBackButton || inFreezeButton ) && !unbonding && !lightSwitch)) || inClin || inTonality)
@@ -270,7 +271,7 @@ void draw() {
     inStart = inStart();
     if (dragging == 0) {
       if (!enter && !back) {
-        if (inButton1 || inButton2 || inClin || inStart || (!lightSwitch && inBackButton) || inTonality)
+        if (inButton1 || inButton2 || inClin || (!started && inStart) || (!lightSwitch && inBackButton) || inTonality)
           cursor(HAND);
         else if (inTimeTag)
           cursor(MOVE);
@@ -293,6 +294,19 @@ void draw() {
         pluckInterval = thresholdInterval + (timeTagX - 0.75) * (maxInterval - thresholdInterval) / 0.25;
       }
       pluckInterval = (float)((int)(pluckInterval * 100)) / 100;
+    }
+    break;
+  case "ORCHE":
+    config();
+    drawOrche();
+    inStart = inStart();
+    if (!enter && !back) {
+      if (inButton1 || inButton2 || inClin || (!started && inStart) || (!lightSwitch && inBackButton) || inTonality)
+        cursor(HAND);
+      else if (inTimeTag)
+        cursor(MOVE);
+      else 
+      cursor(ARROW);
     }
     break;
   }

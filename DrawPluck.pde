@@ -10,7 +10,7 @@ void drawPluck() {
     rotationValue = (float)rotationSensor.getSensorValue();
   } 
   catch(Exception e) {
-    println(e);
+    //println(e);
   }
   currentPluckAngle = PI + (PI - knobAngle) / 2 + knobAngle * rotationValue;
   mountEnterFill(normalStroke, uiOpacity);

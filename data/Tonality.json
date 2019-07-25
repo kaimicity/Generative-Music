@@ -106,17 +106,17 @@
 	},
 	{
 		"name":"#A",
-		"type": "Major",
+		"type": "Minor",
 		"syllables":["A#", "C2", "C#2", "D#2", "F2", "F#2", "G#2"]
 	},
 	{
 		"name":"#D",
-		"type": "Major",
+		"type": "Minor",
 		"syllables":["D#", "F", "F#", "G#", "A#", "B", "C#2"]
 	},
 	{
 		"name":"#G",
-		"type": "Major",
+		"type": "Minor",
 		"syllables":["G#", "A#", "B", "C#2", "D#2", "E2", "F#2"]
 	}
 ]
