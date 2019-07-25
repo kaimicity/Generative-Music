@@ -4,6 +4,7 @@ static class Database {
   static String[] tonalityMark = {"C", "G", "D", "A", "E", "B", "#F", "#C", "F", "#A", "#D", "#G"};
   static ArrayList<PercussionInstrument> percussionInstruments;
   static ArrayList<PluckInstrument> pluckInstruments;
+  static ArrayList<OrcheInstrument> orcheInstruments;
   static HashMap<String, Syllable> syllableDic;
   static HashMap<String, Tonality> majors;
   static HashMap<String, Tonality> minors;
@@ -12,6 +13,7 @@ static class Database {
     Stones stone = new Stones();
     initPercussionInstruments(stone);
     initPluckInstruments(stone);
+    initOrcheInstruments(stone);
     initSyllables(stone);
     initTonalities(stone);
   }
@@ -33,6 +35,20 @@ static class Database {
   static void initPluckInstruments(Stones stone) {
     JSONArray pl = instruments.getJSONArray("Pluck");
     pluckInstruments = new ArrayList<PluckInstrument>();
+    for (int i = 0; i < pl.size(); i ++) {
+      JSONObject instrmt = pl.getJSONObject(i);
+      HashMap<String, String> mps = new HashMap<String, String>();
+      JSONArray ps = instrmt.getJSONArray("paths");
+      for (int j = 0; j < ps.size(); j++) {
+        mps.put(ps.getJSONObject(j).getString("name"), ps.getJSONObject(j).getString("path"));
+      }
+      pluckInstruments.add(stone.new PluckInstrument(instrmt.getString("name"), mps));
+    }
+  }
+  
+  static void initOrcheInstruments(Stones stone) {
+    JSONArray or = instruments.getJSONArray("Orche");
+    orcheInstruments = new ArrayList<OrcheInstrument>();
     for (int i = 0; i < pl.size(); i ++) {
       JSONObject instrmt = pl.getJSONObject(i);
       HashMap<String, String> mps = new HashMap<String, String>();

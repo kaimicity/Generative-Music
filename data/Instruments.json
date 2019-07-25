@@ -44,10 +44,10 @@
       "soundName2": "Clap"
     }
   ],
-	"Pluck":[
-		{
-			"name" : "Piano",
-			"paths" : [
+  "Pluck": [
+    {
+      "name": "Piano",
+      "paths": [
         {
           "name": "C",
           "path": "Material/pluck/piano/C.mp3"
@@ -95,7 +95,7 @@
         {
           "name": "B",
           "path": "Material/pluck/piano/B.mp3"
-        } ,
+        },
         {
           "name": "C2",
           "path": "Material/pluck/piano/C2.mp3"
@@ -140,13 +140,13 @@
           "name": "A#2",
           "path": "Material/pluck/piano/A#2.mp3"
         }
-			
-			]
-		},
-		{
-			"name" : "Zheng",
-			"paths" : [
-				{
+
+      ]
+    },
+    {
+      "name": "Zheng",
+      "paths": [
+        {
           "name": "C",
           "path": "Material/pluck/zheng/C.mp3"
         },
@@ -193,7 +193,7 @@
         {
           "name": "B",
           "path": "Material/pluck/zheng/B.mp3"
-        } ,
+        },
         {
           "name": "C2",
           "path": "Material/pluck/zheng/C2.mp3"
@@ -238,12 +238,12 @@
           "name": "A#2",
           "path": "Material/pluck/zheng/A#2.mp3"
         }
-			]
-		},
-		{
-			"name" : "Guitar",
-			"paths" : [
-				{
+      ]
+    },
+    {
+      "name": "Guitar",
+      "paths": [
+        {
           "name": "C",
           "path": "Material/pluck/guitar/C.mp3"
         },
@@ -290,7 +290,7 @@
         {
           "name": "B",
           "path": "Material/pluck/guitar/B.mp3"
-        } ,
+        },
         {
           "name": "C2",
           "path": "Material/pluck/guitar/C2.mp3"
@@ -335,7 +335,300 @@
           "name": "A#2",
           "path": "Material/pluck/guitar/A#2.mp3"
         }
-			]
-		}
-	]
+      ]
+    }
+  ],
+  "Orche": [
+    {
+      "name": "Violin",
+      "path": [
+        {
+          "name": "C",
+          "path": "Material/pluck/piano/C.mp3"
+        },
+        {
+          "name": "C#",
+          "path": "Material/pluck/piano/C#.mp3"
+        },
+        {
+          "name": "D",
+          "path": "Material/pluck/piano/D.mp3"
+        },
+        {
+          "name": "D#",
+          "path": "Material/pluck/piano/D#.mp3"
+        },
+        {
+          "name": "E",
+          "path": "Material/pluck/piano/E.mp3"
+        },
+        {
+          "name": "F",
+          "path": "Material/pluck/piano/F.mp3"
+        },
+        {
+          "name": "F#",
+          "path": "Material/pluck/piano/F#.mp3"
+        },
+        {
+          "name": "G",
+          "path": "Material/pluck/piano/G.mp3"
+        },
+        {
+          "name": "G#",
+          "path": "Material/pluck/piano/G#.mp3"
+        },
+        {
+          "name": "A",
+          "path": "Material/pluck/piano/A.mp3"
+        },
+        {
+          "name": "A#",
+          "path": "Material/pluck/piano/A#.mp3"
+        },
+        {
+          "name": "B",
+          "path": "Material/pluck/piano/B.mp3"
+        },
+        {
+          "name": "C2",
+          "path": "Material/pluck/piano/C2.mp3"
+        },
+        {
+          "name": "C#2",
+          "path": "Material/pluck/piano/C#2.mp3"
+        },
+        {
+          "name": "D2",
+          "path": "Material/pluck/piano/D2.mp3"
+        },
+        {
+          "name": "D#2",
+          "path": "Material/pluck/piano/D#2.mp3"
+        },
+        {
+          "name": "E2",
+          "path": "Material/pluck/piano/E2.mp3"
+        },
+        {
+          "name": "F2",
+          "path": "Material/pluck/piano/F2.mp3"
+        },
+        {
+          "name": "F#2",
+          "path": "Material/pluck/piano/F#2.mp3"
+        },
+        {
+          "name": "G2",
+          "path": "Material/pluck/piano/G2.mp3"
+        },
+        {
+          "name": "G#2",
+          "path": "Material/pluck/piano/G#2.mp3"
+        },
+        {
+          "name": "A2",
+          "path": "Material/pluck/piano/A2.mp3"
+        },
+        {
+          "name": "A#2",
+          "path": "Material/pluck/piano/A#2.mp3"
+        }
+      ]
+    },
+    {
+      "name": "Violin2",
+      "path": [
+        {
+          "name": "C",
+          "path": "Material/pluck/piano/C.mp3"
+        },
+        {
+          "name": "C#",
+          "path": "Material/pluck/piano/C#.mp3"
+        },
+        {
+          "name": "D",
+          "path": "Material/pluck/piano/D.mp3"
+        },
+        {
+          "name": "D#",
+          "path": "Material/pluck/piano/D#.mp3"
+        },
+        {
+          "name": "E",
+          "path": "Material/pluck/piano/E.mp3"
+        },
+        {
+          "name": "F",
+          "path": "Material/pluck/piano/F.mp3"
+        },
+        {
+          "name": "F#",
+          "path": "Material/pluck/piano/F#.mp3"
+        },
+        {
+          "name": "G",
+          "path": "Material/pluck/piano/G.mp3"
+        },
+        {
+          "name": "G#",
+          "path": "Material/pluck/piano/G#.mp3"
+        },
+        {
+          "name": "A",
+          "path": "Material/pluck/piano/A.mp3"
+        },
+        {
+          "name": "A#",
+          "path": "Material/pluck/piano/A#.mp3"
+        },
+        {
+          "name": "B",
+          "path": "Material/pluck/piano/B.mp3"
+        },
+        {
+          "name": "C2",
+          "path": "Material/pluck/piano/C2.mp3"
+        },
+        {
+          "name": "C#2",
+          "path": "Material/pluck/piano/C#2.mp3"
+        },
+        {
+          "name": "D2",
+          "path": "Material/pluck/piano/D2.mp3"
+        },
+        {
+          "name": "D#2",
+          "path": "Material/pluck/piano/D#2.mp3"
+        },
+        {
+          "name": "E2",
+          "path": "Material/pluck/piano/E2.mp3"
+        },
+        {
+          "name": "F2",
+          "path": "Material/pluck/piano/F2.mp3"
+        },
+        {
+          "name": "F#2",
+          "path": "Material/pluck/piano/F#2.mp3"
+        },
+        {
+          "name": "G2",
+          "path": "Material/pluck/piano/G2.mp3"
+        },
+        {
+          "name": "G#2",
+          "path": "Material/pluck/piano/G#2.mp3"
+        },
+        {
+          "name": "A2",
+          "path": "Material/pluck/piano/A2.mp3"
+        },
+        {
+          "name": "A#2",
+          "path": "Material/pluck/piano/A#2.mp3"
+        }
+      ]
+    },
+    {
+      "name": "Violin3",
+      "path": [
+        {
+          "name": "C",
+          "path": "Material/pluck/piano/C.mp3"
+        },
+        {
+          "name": "C#",
+          "path": "Material/pluck/piano/C#.mp3"
+        },
+        {
+          "name": "D",
+          "path": "Material/pluck/piano/D.mp3"
+        },
+        {
+          "name": "D#",
+          "path": "Material/pluck/piano/D#.mp3"
+        },
+        {
+          "name": "E",
+          "path": "Material/pluck/piano/E.mp3"
+        },
+        {
+          "name": "F",
+          "path": "Material/pluck/piano/F.mp3"
+        },
+        {
+          "name": "F#",
+          "path": "Material/pluck/piano/F#.mp3"
+        },
+        {
+          "name": "G",
+          "path": "Material/pluck/piano/G.mp3"
+        },
+        {
+          "name": "G#",
+          "path": "Material/pluck/piano/G#.mp3"
+        },
+        {
+          "name": "A",
+          "path": "Material/pluck/piano/A.mp3"
+        },
+        {
+          "name": "A#",
+          "path": "Material/pluck/piano/A#.mp3"
+        },
+        {
+          "name": "B",
+          "path": "Material/pluck/piano/B.mp3"
+        },
+        {
+          "name": "C2",
+          "path": "Material/pluck/piano/C2.mp3"
+        },
+        {
+          "name": "C#2",
+          "path": "Material/pluck/piano/C#2.mp3"
+        },
+        {
+          "name": "D2",
+          "path": "Material/pluck/piano/D2.mp3"
+        },
+        {
+          "name": "D#2",
+          "path": "Material/pluck/piano/D#2.mp3"
+        },
+        {
+          "name": "E2",
+          "path": "Material/pluck/piano/E2.mp3"
+        },
+        {
+          "name": "F2",
+          "path": "Material/pluck/piano/F2.mp3"
+        },
+        {
+          "name": "F#2",
+          "path": "Material/pluck/piano/F#2.mp3"
+        },
+        {
+          "name": "G2",
+          "path": "Material/pluck/piano/G2.mp3"
+        },
+        {
+          "name": "G#2",
+          "path": "Material/pluck/piano/G#2.mp3"
+        },
+        {
+          "name": "A2",
+          "path": "Material/pluck/piano/A2.mp3"
+        },
+        {
+          "name": "A#2",
+          "path": "Material/pluck/piano/A#2.mp3"
+        }
+      ]
+    }
+  ]
 }

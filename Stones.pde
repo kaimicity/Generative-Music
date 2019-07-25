@@ -45,6 +45,7 @@ double indoorLight;
 
 int arrowTik;
 int bondedNumber;
+int currentOrcheIndex;
 int currentPercussionIndex;
 int currentPluckIndex;
 int dragging;
@@ -85,6 +86,7 @@ ArrayList<Syllable> natureSyllables;
 PFont nameFont;
 static PFont percussionFont;
 static PFont pluckFont;
+static PFont orcheFont;
 
 boolean showInstruction;
 boolean enter;
@@ -106,6 +108,7 @@ Button clearAllButton;
 Button freezeButton;
 PercussionInstrument currentPercussion;
 PluckInstrument currentPluck;
+OrcheInstrument currentOrche;
 SlideTag ignoreTag;
 SlideTag lightTag;
 SlideTag heavyTag;
@@ -172,6 +175,7 @@ void setup() {
   nameFont = createFont("fonts/TLI.ttf", 20);
   percussionFont = createFont("fonts/Mobile.ttf", 30);
   pluckFont = createFont("fonts/SFA.ttf", 30);
+  orcheFont = createFont("Hollywood.ttf", 30);
 
   instruments = loadJSONObject("Instruments.json");
   instructions = loadJSONObject("Instruction.json");
@@ -256,6 +260,7 @@ void init() {
 
   currentPercussion = Database.percussionInstruments.get(currentPercussionIndex);
   currentPluck = Database.pluckInstruments.get(currentPluckIndex);
+  currentOrche = Database.orcheInstruments.get(currentOrcheIndex);
   currentInstruments = new ArrayList<Instrument>();
   currentInstruments.add(currentPercussion);
   currentInstruments.add(currentPluck);
