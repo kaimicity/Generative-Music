@@ -81,19 +81,19 @@ void mouseReleased() {
     break;
   case "ORCHE":
     if (!enter && !back && inButton1) {
-      if (currentPluckIndex - 1 >= 0)
-        currentPluckIndex --;
+      if (currentOrcheIndex - 1 >= 0)
+        currentOrcheIndex --;
       else
-        currentPluckIndex = Database.pluckInstruments.size() - 1;
-      currentPluck = Database.pluckInstruments.get(currentPluckIndex);
-      currentTrack.setInstrument(currentPluck);
+        currentOrcheIndex = Database.orcheInstruments.size() - 1;
+      currentOrche = Database.orcheInstruments.get(currentOrcheIndex);
+      currentTrack.setInstrument(currentOrche);
     } else if (!enter && !back && inButton2) {
-      if (currentPluckIndex + 1 <= Database.pluckInstruments.size() - 1)
-        currentPluckIndex ++;
+      if (currentOrcheIndex + 1 <= Database.orcheInstruments.size() - 1)
+        currentOrcheIndex ++;
       else
-        currentPluckIndex = 0;
-      currentPluck = Database.pluckInstruments.get(currentPluckIndex);
-      currentTrack.setInstrument(currentPluck);
+        currentOrcheIndex = 0;
+      currentOrche = Database.orcheInstruments.get(currentOrcheIndex);
+      currentTrack.setInstrument(currentOrche);
     } else if (inBackButton) {
       startBack();
     }

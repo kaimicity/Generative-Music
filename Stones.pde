@@ -13,7 +13,8 @@ PVector knobPosition;
 PVector scrollPosition;
 PVector stonePosition;
 PVector tonalityPosition;
-PVector 
+PVector noteBarAreaPosition;
+PVector orcheTimerPosition;
 
 float backButtonWidth;
 float backButtonHeight;
@@ -41,6 +42,10 @@ float timeTagX;
 float rotationValue;
 float tonalityWidth;
 float tonalityHeight;
+float noteBarAreaWidth;
+float noteBarAreaHeight;
+float orcheTimerR;
+float orcheInterval;
 
 double indoorLight;
 
@@ -132,6 +137,8 @@ void setup() {
   stonePosition = new PVector(200 + width * 4 / 7, height * 10 / 20);
   knobPosition = new PVector(200 + width * 4 / 7, height + 300);
   tonalityPosition = new PVector( 200 + width * 5.55 / 7, height / 21);
+  noteBarAreaPosition = new PVector(900 , height * 10 / 20);
+  orcheTimerPosition = new PVector(650, height - 35);
   
 
   backButtonWidth = width * 2 / 7;
@@ -150,6 +157,9 @@ void setup() {
   startR = stoneR;
   tonalityWidth = width * 2.5 / 14;
   tonalityHeight = height * 1 / 14;
+  noteBarAreaWidth = 270;
+  noteBarAreaHeight = height  * 10 / 20;
+  orcheTimerR = 75;
 
   arrowTik = 0;
   numberOfRing = 5;
@@ -233,6 +243,7 @@ void init() {
   maxInterval = 2.0;
   timeTagX = 0.375;
   indoorLight = 0;
+  orcheInterval = 0.3;
 
   showInstruction = true;
   enter = false;
