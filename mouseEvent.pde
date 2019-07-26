@@ -3,10 +3,10 @@ void mouseReleased() {
   if (inClinch()) {
     showInstruction = !showInstruction;
   }
-  if(inTonality()){
-    if(!tonalityLocked){
+  if (inTonality()) {
+    if (!tonalityLocked) {
       tonalityLocked = true;
-    }else{
+    } else {
       tonalityLocked = false;
       tonalityTimeStamp = millis();
     }
@@ -75,8 +75,27 @@ void mouseReleased() {
       currentTrack.setInstrument(currentPluck);
     } else if (inBackButton) {
       startBack();
-    } else if(inStart){
+    } else if (inStart) {
       pluckStart();
+    }
+    break;
+  case "ORCHE":
+    if (!enter && !back && inButton1) {
+      if (currentPluckIndex - 1 >= 0)
+        currentPluckIndex --;
+      else
+        currentPluckIndex = Database.pluckInstruments.size() - 1;
+      currentPluck = Database.pluckInstruments.get(currentPluckIndex);
+      currentTrack.setInstrument(currentPluck);
+    } else if (!enter && !back && inButton2) {
+      if (currentPluckIndex + 1 <= Database.pluckInstruments.size() - 1)
+        currentPluckIndex ++;
+      else
+        currentPluckIndex = 0;
+      currentPluck = Database.pluckInstruments.get(currentPluckIndex);
+      currentTrack.setInstrument(currentPluck);
+    } else if (inBackButton) {
+      startBack();
     }
   }
 }

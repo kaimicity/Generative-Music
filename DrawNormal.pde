@@ -69,8 +69,8 @@ void drawPanel() {
 void drawTonality() {
   textAlign(RIGHT, CENTER);
   //textMode(SHAPE);
-  textSize(30);
   textFont(nameFont);
+  textSize(45);
   String tona = "MAJOR C";
   if (isMajor) {
     fill(normalStroke);
@@ -88,9 +88,9 @@ void drawTonality() {
   } else {
     fill(normalStroke, 100);
     noStroke();
-    rect(tonalityPosition.x + tonalityWidth - textWidth(tona), tonalityPosition.y + tonalityHeight - 2, textWidth(tona), 2);
+    rect(tonalityPosition.x + tonalityWidth - textWidth(tona), tonalityPosition.y + tonalityHeight + 5, textWidth(tona), 2);
     fill(normalStroke);
-    rect(tonalityPosition.x + tonalityWidth - textWidth(tona), tonalityPosition.y + tonalityHeight - 2, textWidth(tona) * (millis() - tonalityTimeStamp) / 120000, 2);
+    rect(tonalityPosition.x + tonalityWidth - textWidth(tona), tonalityPosition.y + tonalityHeight + 5, textWidth(tona) * (millis() - tonalityTimeStamp) / 120000, 2);
   }
 }
 
@@ -301,10 +301,8 @@ void draw() {
     drawOrche();
     inStart = inStart();
     if (!enter && !back) {
-      if (inButton1 || inButton2 || inClin || (!started && inStart) || (!lightSwitch && inBackButton) || inTonality)
+      if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton) || inTonality)
         cursor(HAND);
-      else if (inTimeTag)
-        cursor(MOVE);
       else 
       cursor(ARROW);
     }

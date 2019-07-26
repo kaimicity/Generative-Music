@@ -17,7 +17,7 @@ class PluckNote extends Note{
   
   void resetAudio(){
     String mySyllableName = currentTonality.getMySyllables().get(naturalSyllable).getName();
-    this.audio = ((PluckInstrument) tracks.get(this.trackIndex).getInstrument()).getPlayer(mySyllableName);
+    this.audio = minim.loadFile(((PluckInstrument) tracks.get(this.trackIndex).getInstrument()).getPath(mySyllableName));
   }
   
   void setColor(){

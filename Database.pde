@@ -49,14 +49,14 @@ static class Database {
   static void initOrcheInstruments(Stones stone) {
     JSONArray or = instruments.getJSONArray("Orche");
     orcheInstruments = new ArrayList<OrcheInstrument>();
-    for (int i = 0; i < pl.size(); i ++) {
-      JSONObject instrmt = pl.getJSONObject(i);
+    for (int i = 0; i < or.size(); i ++) {
+      JSONObject instrmt = or.getJSONObject(i);
       HashMap<String, String> mps = new HashMap<String, String>();
       JSONArray ps = instrmt.getJSONArray("paths");
       for (int j = 0; j < ps.size(); j++) {
         mps.put(ps.getJSONObject(j).getString("name"), ps.getJSONObject(j).getString("path"));
       }
-      pluckInstruments.add(stone.new PluckInstrument(instrmt.getString("name"), mps));
+      orcheInstruments.add(stone.new OrcheInstrument(instrmt.getString("name"), mps));
     }
   }
 

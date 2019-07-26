@@ -341,7 +341,7 @@
   "Orche": [
     {
       "name": "Violin",
-      "path": [
+      "paths": [
         {
           "name": "C",
           "path": "Material/pluck/piano/C.mp3"
@@ -438,7 +438,7 @@
     },
     {
       "name": "Violin2",
-      "path": [
+      "paths": [
         {
           "name": "C",
           "path": "Material/pluck/piano/C.mp3"
@@ -535,7 +535,7 @@
     },
     {
       "name": "Violin3",
-      "path": [
+      "paths": [
         {
           "name": "C",
           "path": "Material/pluck/piano/C.mp3"

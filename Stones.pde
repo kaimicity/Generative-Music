@@ -13,6 +13,7 @@ PVector knobPosition;
 PVector scrollPosition;
 PVector stonePosition;
 PVector tonalityPosition;
+PVector 
 
 float backButtonWidth;
 float backButtonHeight;
@@ -130,7 +131,8 @@ void setup() {
   scrollPosition = new PVector(width / 10 - width / 50, height / 10 - height / 100);
   stonePosition = new PVector(200 + width * 4 / 7, height * 10 / 20);
   knobPosition = new PVector(200 + width * 4 / 7, height + 300);
-  tonalityPosition = new PVector( 200 + width * 5.8 / 7, height / 21);
+  tonalityPosition = new PVector( 200 + width * 5.55 / 7, height / 21);
+  
 
   backButtonWidth = width * 2 / 7;
   backButtonHeight = height / 10;
@@ -146,7 +148,7 @@ void setup() {
   slideBarY = height + 25;
   stoneR = height * 1.5 / 20;
   startR = stoneR;
-  tonalityWidth = width * 2 / 14;
+  tonalityWidth = width * 2.5 / 14;
   tonalityHeight = height * 1 / 14;
 
   arrowTik = 0;
@@ -175,7 +177,7 @@ void setup() {
   nameFont = createFont("fonts/TLI.ttf", 20);
   percussionFont = createFont("fonts/Mobile.ttf", 30);
   pluckFont = createFont("fonts/SFA.ttf", 30);
-  orcheFont = createFont("Hollywood.ttf", 30);
+  orcheFont = createFont("fonts/Hollywood.ttf", 30);
 
   instruments = loadJSONObject("Instruments.json");
   instructions = loadJSONObject("Instruction.json");
@@ -264,6 +266,7 @@ void init() {
   currentInstruments = new ArrayList<Instrument>();
   currentInstruments.add(currentPercussion);
   currentInstruments.add(currentPluck);
+  currentInstruments.add(currentOrche);
   currentTonality = natureTonality;
 
   ignoreTag = new SlideTag(0, "None", false, percussionIgnore);
