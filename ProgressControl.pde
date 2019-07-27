@@ -33,7 +33,7 @@ void config() {
     back();
   }
   drawInstruction(uiOpacity);
-  if (!enter && !back) {
+  if (!enter && !back && !currentPanel.equals("ORCHE")) {
     try {
       lightValue = lightSensor.getSensorValue();
       if (indoorLight - lightValue > 0.03 && currentTrack.allNotesReady()) {
@@ -44,7 +44,7 @@ void config() {
       //println(e.toString());
     }
   }
-  if (!lightSwitch)
+  if (!lightSwitch || currentPanel.equals("ORCHE"))
     backButton.draw(uiOpacity);
   inButton1 = inLeftSwitchButton();
   inButton2 = inRightSwitchButton();

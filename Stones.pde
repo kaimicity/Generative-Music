@@ -15,6 +15,7 @@ PVector stonePosition;
 PVector tonalityPosition;
 PVector noteBarAreaPosition;
 PVector orcheTimerPosition;
+PVector ballPosition;
 
 float backButtonWidth;
 float backButtonHeight;
@@ -47,6 +48,10 @@ float noteBarAreaHeight;
 float orcheTimerR;
 float orcheInterval;
 float maxOrcheInterval;
+float minOrcheInterval;
+float ballSpeed;
+float ballTarget;
+float ballAcc;
 
 double indoorLight;
 
@@ -139,7 +144,7 @@ void setup() {
   knobPosition = new PVector(200 + width * 4 / 7, height + 300);
   tonalityPosition = new PVector( 200 + width * 5.55 / 7, height / 21);
   noteBarAreaPosition = new PVector(900 , height * 10 / 20);
-  orcheTimerPosition = new PVector(650, height - 35);
+  orcheTimerPosition = new PVector(650, height - 20);
   
 
   backButtonWidth = width * 2 / 7;
@@ -160,7 +165,9 @@ void setup() {
   tonalityHeight = height * 1 / 14;
   noteBarAreaWidth = 270;
   noteBarAreaHeight = height  * 10 / 20;
-  orcheTimerR = 75;
+  orcheTimerR = 60;
+  ballSpeed = 7;
+  //ballAcc = 4;
 
   arrowTik = 0;
   numberOfRing = 5;
@@ -227,6 +234,8 @@ void setup() {
 }
 
 void init() {
+  
+  ballPosition = new PVector(noteBarAreaPosition.x - 40 + 15, noteBarAreaPosition.y + noteBarAreaHeight + 40 - 5 - 2);
   currentPercussionIndex = 0;
   currentPluckIndex = 0;
   panelOpacity = 255;
@@ -244,8 +253,10 @@ void init() {
   maxInterval = 2.0;
   timeTagX = 0.375;
   indoorLight = 0;
-  orcheInterval = 0.3;
-  maxOrcheInterval = 2.0;
+  orcheInterval = 1.0;
+  minOrcheInterval = 0.5;
+  maxOrcheInterval = 4.0;
+  currentOrcheNote = 0;
 
   showInstruction = true;
   enter = false;

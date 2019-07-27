@@ -14,6 +14,10 @@ class SoundTrack {
   int noteNumber;
   int direction;
   boolean needActivate;
+  AudioPlayer orchePlayer;
+  boolean diminishing;
+  String callbackPath;
+  boolean orcheSwitch;
 
   SoundTrack(int i) {
     this.index = i;
@@ -23,6 +27,8 @@ class SoundTrack {
     noteNumber = 0;
     direct();
     needActivate = false;
+    diminishing = false;
+    orcheSwitch = false;
   }
 
   void direct() {
@@ -71,6 +77,9 @@ class SoundTrack {
     preLength = leastWholeLength / 3;
     mainLength = 0;
     lastValidTime = 0;
+    needActivate = false;
+    diminishing = false;
+    orcheSwitch = false;
   }
 
   void unbond() {
@@ -104,6 +113,19 @@ class SoundTrack {
       myLabel.setSpeed(noteSpeed * ((float)Math.random() * 0.05 + 0.15));
       myLabel.startWalking();
       needActivate = false;
+    }
+    if (instrument.getType().equals("ORCHE")) {
+      if (diminishing && orchePlayer.getGain() > -20) {
+        orchePlayer.setGain(orchePlayer.getGain() - 1);
+        if (orchePlayer.getGain() <= -20) {
+          diminishing = false;
+          orchePlayer = minim.loadFile(callbackPath);
+          orchePlayer.rewind();
+          orchePlayer.loop();
+        }
+      } else if (!diminishing && orchePlayer.getGain() < 0) {
+        orchePlayer.setGain(orchePlayer.getGain() + 1);
+      }
     }
   }
 
@@ -151,5 +173,21 @@ class SoundTrack {
         ((PluckNote)n).resetAudio();
       }
     }
+  }
+
+  void setOrchePlayer(String path) {
+    callbackPath = path;
+    diminishing = true;
+    if (!orcheSwitch) {
+      orcheSwitch = true;
+      orchePlayer = minim.loadFile(callbackPath);
+      diminishing = false;
+      orchePlayer.rewind();
+      orchePlayer.loop();
+    }
+  }
+
+  AudioPlayer getOrchePlayer() {
+    return this.orchePlayer;
   }
 }

@@ -319,8 +319,8 @@ void draw() {
       cursor(MOVE);
       orcheInterval = normaliseAngle((float)mouseAngle + PI / 2) / 2 / PI * maxOrcheInterval;
       orcheInterval = (float)((int)(orcheInterval * 100)) / 100;
-      if(orcheInterval < 0.3)
-        orcheInterval = 0.3;
+      if(orcheInterval < minOrcheInterval)
+        orcheInterval = minOrcheInterval;
     }
     break;
   }

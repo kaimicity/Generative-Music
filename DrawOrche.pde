@@ -1,3 +1,5 @@
+
+int orcheTimeStamp;
 void drawOrche() {
   mouseAngle = acos((mouseX - orcheTimerPosition.x) / getDistance(mouseX, mouseY, orcheTimerPosition.x, orcheTimerPosition.y));
   if (mouseY < orcheTimerPosition.y)
@@ -45,7 +47,7 @@ void drawNoteBars() {
   for (int i = 0; i < natureSyllables.size(); i ++) {
     noStroke();
     mountEnterFill(natureSyllables.get(i).getColor(), uiOpacity);
-    rect( noteBarAreaPosition.x + i * noteBarAreaWidth / 7, noteBarAreaPosition.y + noteBarAreaHeight - (i + 1) * noteBarAreaHeight / 7, 30, (i + 1) * noteBarAreaHeight / 7 + 40);
+    rect( noteBarAreaPosition.x + i * noteBarAreaWidth / 7, noteBarAreaPosition.y + noteBarAreaHeight - (i + 1) * noteBarAreaHeight / 7 - 5, 30, (i + 1) * noteBarAreaHeight / 7 + 40 + 5);
   }
   noFill();
   mountEnterStroke(normalStroke, uiOpacity);
@@ -54,13 +56,11 @@ void drawNoteBars() {
   drawTheBall();
 }
 
-void drawTheBall() {
-  mountEnterFill(normalStroke, uiOpacity);
-  ellipse(noteBarAreaPosition.x - 40 + 15, noteBarAreaPosition.y + noteBarAreaHeight + 40 - 5 - 2, 10, 10);
-}
 
 void drawOrcheTimer() {
-  fill(normalStroke);
+  if (currentOrcheNote != 0)
+    drawNoteArc(natureSyllables.get(currentOrcheNote - 1).getColor());
+  mountEnterFill(normalStroke, uiOpacity);
   noStroke();
   arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2 + PI * 2 * orcheInterval / maxOrcheInterval, PI * 3 / 2);
   mountEnterStroke(normalStroke, uiOpacity);
@@ -88,10 +88,6 @@ void drawOrcheTimer() {
     rotate(PI);
     text(orcheInterval + "s", 0, 0);
   }
-  //triangle(0, 0,  - orcheTimerR / 2, - orcheTimerR, orcheTimerR / 2, - orcheTimerR);
-  //triangle(0, 0,  - orcheTimerR / 2, orcheTimerR, orcheTimerR / 2, orcheTimerR);
-  //line(- orcheTimerR * 2 / 3, - orcheTimerR, orcheTimerR * 2 / 3, - orcheTimerR);
-  //line(- orcheTimerR * 2 / 3, orcheTimerR, orcheTimerR * 2 / 3, orcheTimerR);
   popMatrix();
 }
 
@@ -103,8 +99,58 @@ boolean inTimer() {
     return false;
 }
 
-void drawNoteArc(color c){
+void drawNoteArc(color c) {
   noStroke();
   fill(c);
-  arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2, - PI / 2 + PI * 2 * orcheInterval / maxOrcheInterval);
+  if (orcheInterval * 1000 - (millis() - orcheTimeStamp) > 0)
+    arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2, - PI / 2 + PI * 2 * (orcheInterval * 1000 - (millis() - orcheTimeStamp)) / (maxOrcheInterval * 1000));
+}
+
+void getBallY() {
+  double orcheLightValue = 0;
+  try {
+    orcheLightValue = lightSensor.getSensorValue();
+  } 
+  catch(Exception e) {
+  }
+  if (orcheLightValue > indoorLight)
+    orcheLightValue = indoorLight;
+  ballTarget = (float)((noteBarAreaPosition.y + noteBarAreaHeight + 40 - 5 - 2) - (noteBarAreaHeight + 35) * (indoorLight - orcheLightValue) / indoorLight);
+  if (ballPosition.y < ballTarget)
+    ballPosition.y += ballSpeed;
+  else if (ballPosition.y > ballTarget)
+    ballPosition.y -= ballSpeed;
+  if (Math.abs(ballPosition.y - ballTarget) < ballSpeed)
+    ballPosition.y = ballTarget;
+}
+
+int currentOrcheNote;
+
+void getBallX() {
+  float tempY = (noteBarAreaPosition.y + noteBarAreaHeight + 40 - 2) - ballPosition.y;
+  if (tempY < 40)
+    currentOrcheNote = 0;
+  else {
+    int previousNote = currentOrcheNote;
+    currentOrcheNote = (int)((tempY - 40) / (noteBarAreaHeight / 7)) + 1;
+    if (currentOrcheNote == 8)
+      currentOrcheNote = 7;
+    if (previousNote != currentOrcheNote)
+      orcheTimeStamp = millis();
+  }
+  ballPosition.x = noteBarAreaPosition.x - 40 + 15 + 40 * currentOrcheNote;
+}
+
+void drawTheBall() {
+  mountEnterFill(normalStroke, uiOpacity);
+  getBallY();
+  getBallX();
+  ellipse(ballPosition.x, ballPosition.y, 10, 10);
+}
+
+void generateOrcheNote(){
+  if (currentOrcheNote != 0) {
+    //Note note = new PluckNote(currentTrack.getIndex(), currentSyllable.getName());
+    //currentTrack.addNote(note);
+  }
 }
