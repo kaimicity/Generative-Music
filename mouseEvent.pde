@@ -80,7 +80,10 @@ void mouseReleased() {
     }
     break;
   case "ORCHE":
-    if (!enter && !back && inButton1) {
+    if (dragging!=0) {
+      cursor(ARROW);
+      dragging = 0;
+    } else if (!enter && !back && inButton1) {
       if (currentOrcheIndex - 1 >= 0)
         currentOrcheIndex --;
       else

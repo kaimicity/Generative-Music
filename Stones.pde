@@ -46,6 +46,7 @@ float noteBarAreaWidth;
 float noteBarAreaHeight;
 float orcheTimerR;
 float orcheInterval;
+float maxOrcheInterval;
 
 double indoorLight;
 
@@ -244,6 +245,7 @@ void init() {
   timeTagX = 0.375;
   indoorLight = 0;
   orcheInterval = 0.3;
+  maxOrcheInterval = 2.0;
 
   showInstruction = true;
   enter = false;

@@ -1,4 +1,7 @@
-void drawOrche(){
+void drawOrche() {
+  mouseAngle = acos((mouseX - orcheTimerPosition.x) / getDistance(mouseX, mouseY, orcheTimerPosition.x, orcheTimerPosition.y));
+  if (mouseY < orcheTimerPosition.y)
+    mouseAngle = PI * 2 - mouseAngle;
   mountEnterFill(normalStroke, uiOpacity);
   textFont(orcheFont);
   textAlign(CENTER, CENTER);
@@ -34,12 +37,12 @@ void drawOrche(){
   drawOrcheTimer();
 }
 
-void drawNoteBars(){
+void drawNoteBars() {
   //stroke(normalStroke);
   //fill(normalStroke);
   //rect(noteBarAreaPosition.x, noteBarAreaPosition.y, noteBarAreaWidth, noteBarAreaHeight);
   strokeCap(ROUND);
-  for(int i = 0; i < natureSyllables.size(); i ++){
+  for (int i = 0; i < natureSyllables.size(); i ++) {
     noStroke();
     mountEnterFill(natureSyllables.get(i).getColor(), uiOpacity);
     rect( noteBarAreaPosition.x + i * noteBarAreaWidth / 7, noteBarAreaPosition.y + noteBarAreaHeight - (i + 1) * noteBarAreaHeight / 7, 30, (i + 1) * noteBarAreaHeight / 7 + 40);
@@ -51,21 +54,57 @@ void drawNoteBars(){
   drawTheBall();
 }
 
-void drawTheBall(){
+void drawTheBall() {
   mountEnterFill(normalStroke, uiOpacity);
   ellipse(noteBarAreaPosition.x - 40 + 15, noteBarAreaPosition.y + noteBarAreaHeight + 40 - 5 - 2, 10, 10);
 }
 
-void drawOrcheTimer(){
+void drawOrcheTimer() {
+  fill(normalStroke);
+  noStroke();
+  arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2 + PI * 2 * orcheInterval / maxOrcheInterval, PI * 3 / 2);
   mountEnterStroke(normalStroke, uiOpacity);
   strokeWeight(2);
+  strokeJoin(ROUND);
   noFill();
   ellipse(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2);
-  fill(whiteColor);
-  ellipse(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 4 / 3, orcheTimerR * 4 / 3);
+  ellipse(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2 + 8, orcheTimerR * 2 + 8);
   pushMatrix();
   mountEnterFill(normalStroke, uiOpacity);
   translate(orcheTimerPosition.x, orcheTimerPosition.y);
   line(0, 0, 0, - orcheTimerR);
+  noFill();
+  rect(- 4, - orcheTimerR - 12, 8, 8);
+  rotate(- PI / 2 + PI * 2 * orcheInterval / maxOrcheInterval);
+  stroke(normalStroke, 100);
+  line(0, 0, orcheTimerR, 0);
+  textAlign(CENTER, TOP);
+  if (orcheInterval < maxOrcheInterval / 2) {
+    fill(whiteColor);
+    text(orcheInterval + "s", orcheTimerR / 2, 0);
+  } else {
+    fill(normalStroke, 100);
+    translate(orcheTimerR / 2, 0);
+    rotate(PI);
+    text(orcheInterval + "s", 0, 0);
+  }
+  //triangle(0, 0,  - orcheTimerR / 2, - orcheTimerR, orcheTimerR / 2, - orcheTimerR);
+  //triangle(0, 0,  - orcheTimerR / 2, orcheTimerR, orcheTimerR / 2, orcheTimerR);
+  //line(- orcheTimerR * 2 / 3, - orcheTimerR, orcheTimerR * 2 / 3, - orcheTimerR);
+  //line(- orcheTimerR * 2 / 3, orcheTimerR, orcheTimerR * 2 / 3, orcheTimerR);
   popMatrix();
+}
+
+boolean inTimer() {
+  boolean angleDete = mouseAngle > normaliseAngle(PI * 3 / 2 + PI * 2 * orcheInterval / maxOrcheInterval) && mouseAngle < normaliseAngle(PI * 3 / 2 + PI * 2 * orcheInterval / maxOrcheInterval + PI / 10);
+  if (angleDete && getDistance(mouseX, mouseY, orcheTimerPosition.x, orcheTimerPosition.y) <= orcheTimerR)
+    return true;
+  else
+    return false;
+}
+
+void drawNoteArc(color c){
+  noStroke();
+  fill(c);
+  arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2, - PI / 2 + PI * 2 * orcheInterval / maxOrcheInterval);
 }

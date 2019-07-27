@@ -104,6 +104,7 @@ boolean inTimeTag;
 boolean inClin;
 boolean inStart;
 boolean inTonality;
+boolean inTimer;
 
 double lightValue;
 boolean eraseFlag;
@@ -114,6 +115,7 @@ boolean freezing;
 double temprature;
 boolean isMajor;
 boolean tonalityLocked;
+double mouseAngle;
 
 void draw() {
   if (indoorLight == 0.0) {  
@@ -300,11 +302,25 @@ void draw() {
     config();
     drawOrche();
     inStart = inStart();
-    if (!enter && !back) {
-      if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton) || inTonality)
-        cursor(HAND);
-      else 
-      cursor(ARROW);
+    inTimer = inTimer();
+    if (dragging == 0) {
+      if (!enter && !back) {
+        if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton) || inTonality)
+          cursor(HAND);
+        else if (inTimer)
+          cursor(MOVE);
+        else 
+        cursor(ARROW);
+        if (inTimer && mousePressed) {
+          dragging = 1;
+        }
+      }
+    } else if (dragging == 1) {
+      cursor(MOVE);
+      orcheInterval = normaliseAngle((float)mouseAngle + PI / 2) / 2 / PI * maxOrcheInterval;
+      orcheInterval = (float)((int)(orcheInterval * 100)) / 100;
+      if(orcheInterval < 0.3)
+        orcheInterval = 0.3;
     }
     break;
   }
