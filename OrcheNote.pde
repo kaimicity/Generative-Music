@@ -21,16 +21,21 @@ class OrcheNote extends Note {
   }
 
   void resetAudio() {
-    String mySyllableName = currentTonality.getMySyllables().get(naturalSyllable).getName();
-    this.audioPath = ((OrcheInstrument) tracks.get(this.trackIndex).getInstrument()).getPath(mySyllableName);
+    if (!isEnd) {
+      String mySyllableName = currentTonality.getMySyllables().get(naturalSyllable).getName();
+      this.audioPath = ((OrcheInstrument) tracks.get(this.trackIndex).getInstrument()).getPath(mySyllableName);
+    }
   }
 
   void setColor() {
-    myColor = natureTonality.getMySyllables().get(naturalSyllable).getColor();
+    if (!isEnd)
+      myColor = natureTonality.getMySyllables().get(naturalSyllable).getColor();
+    else 
+    myColor = whiteColor;
   }
-  
-  void play(){
-    if(!isEnd)
+
+  void play() {
+    if (!isEnd)
       tracks.get(trackIndex).setOrchePlayer(audioPath);
     else
       tracks.get(trackIndex).diminish();
