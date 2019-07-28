@@ -21,23 +21,40 @@ class OrcheNote extends Note {
   }
 
   void resetAudio() {
-    if (!isEnd) {
+    //if (!isEnd) {
       String mySyllableName = currentTonality.getMySyllables().get(naturalSyllable).getName();
       this.audioPath = ((OrcheInstrument) tracks.get(this.trackIndex).getInstrument()).getPath(mySyllableName);
-    }
+    //} else{
+    //  this.audioPath = "END";
+    //}
+    
   }
 
   void setColor() {
-    if (!isEnd)
+    //if (!isEnd)
       myColor = natureTonality.getMySyllables().get(naturalSyllable).getColor();
-    else 
-    myColor = whiteColor;
+    //else 
+    //myColor = whiteColor;
   }
 
   void play() {
-    if (!isEnd)
+    //if (!isEnd)
       tracks.get(trackIndex).setOrchePlayer(audioPath);
-    else
-      tracks.get(trackIndex).diminish();
+      if(isEnd && !tracks.get(trackIndex).bothEnd()){
+        tracks.get(trackIndex).setEnd();
+      } else{
+        isEnd = false;
+      }
+    //else
+    //  tracks.get(trackIndex).diminish();
   }
+  
+  void setEnd(){
+    this.isEnd = true;
+  }
+  
+  boolean getEnd(){
+    return isEnd;
+  }
+  
 }

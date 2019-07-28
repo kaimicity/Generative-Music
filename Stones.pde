@@ -3,6 +3,7 @@ import com.phidget22.* ;
 import processing.pdf.*;
 
 static Minim minim ;
+AudioPlayer testPlayer;
 
 PVector backButtonPosition;
 PVector freezeButtonPosition;
@@ -130,7 +131,7 @@ Tonality currentTonality;
 
 void setup() {
   minim = new Minim(this) ;
-
+  testPlayer = minim.loadFile("Material/orche/organ/C.mp3");
   size(1200, 800);
   width = 1000;
   height = 750;
@@ -257,6 +258,7 @@ void init() {
   minOrcheInterval = 0.5;
   maxOrcheInterval = 4.0;
   currentOrcheNote = 0;
+  indoorLight = 0.0;
 
   showInstruction = true;
   enter = false;

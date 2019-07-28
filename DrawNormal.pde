@@ -50,9 +50,13 @@ void drawPanel() {
   ellipse(roulettePosition.x, roulettePosition.y, panelR * 2, panelR * 2);
   pushMatrix();
   translate(roulettePosition.x, roulettePosition.y);
-  if (mousePressed && test != -1 && !enter && !back) {
+  if (mousePressed && test != -1 && !enter && !back && !(test == 2 && !lightSwitch)) {
     fill(unbondSoundtrack);
     arc(0, 0, panelR * 2, panelR * 2, pbs.get(test).getStarting(), pbs.get(test).getStarting() + PI * 2 / 3);
+  }
+  if (!lightSwitch) {
+    mountEnterFill(normalStroke, panelOpacity);
+    arc(0, 0, panelR * 2, panelR * 2, pbs.get(2).getStarting(), pbs.get(2).getStarting() + PI * 2 / 3);
   }
   rotate(PI / 6);
   line(0, 0, panelR, 0);
@@ -121,8 +125,8 @@ void draw() {
   if (indoorLight == 0.0) {  
     try {
       indoorLight = lightSensor.getSensorValue();
+      println(indoorLight);
       temprature = tempratureSensor.getSensorValue();
-      //println(indoorLight);
       if (indoorLight < 0.2)
         lightSwitch = false;
       else
@@ -134,7 +138,7 @@ void draw() {
     } 
     catch(Exception e) {
       //println(e.toString());
-      indoorLight = -1;
+      //indoorLight = -1;
     }
     tonalityTimeStamp = millis();
     resetTonality();
@@ -151,7 +155,8 @@ void draw() {
   inTonality = inTonality();
   switch(currentPanel) {
   case "NONE":
-    drawPanel();
+    if (bondedNumber < 5)
+      drawPanel();
     drawInstruction(panelOpacity);
     inFreezeButton = freezeButton.isFocused();
     if (mousePressed && inFreezeButton && !lightSwitch) {
@@ -205,16 +210,18 @@ void draw() {
       if (panelOpacity >= 255) {
         back = false;
       }
-    } else if (test != -1) {
-      if (!enter && !back)
-        cursor(HAND);
+    } else if (test != -1 && bondedNumber < 5) {
       textAlign(CENTER, CENTER);
       textFont(nameFont);
       textSize(height / 15);
       fill(normalStroke);
-      if (!enter)
+      if (!enter && !back) {
+        if (!(test == 2 && !lightSwitch))
+          cursor(HAND);
+        else
+          cursor(ARROW);
         text(pbs.get(test).getName(), roulettePosition.x, height * 14 / 15);
-      else {
+      } else {
         cursor(ARROW);
         fill(normalStroke, panelOpacity);
         text(pbs.get(test).getName(), roulettePosition.x, height * 14 / 15);
@@ -305,7 +312,7 @@ void draw() {
     inTimer = inTimer();
     if (dragging == 0) {
       if (!enter && !back) {
-        if (inButton1 || inButton2 || inClin || (!lightSwitch && inBackButton) || inTonality)
+        if (inButton1 || inButton2 || inClin || inBackButton || inTonality)
           cursor(HAND);
         else if (inTimer)
           cursor(MOVE);
@@ -319,7 +326,7 @@ void draw() {
       cursor(MOVE);
       orcheInterval = normaliseAngle((float)mouseAngle + PI / 2) / 2 / PI * maxOrcheInterval;
       orcheInterval = (float)((int)(orcheInterval * 100)) / 100;
-      if(orcheInterval < minOrcheInterval)
+      if (orcheInterval < minOrcheInterval)
         orcheInterval = minOrcheInterval;
     }
     break;

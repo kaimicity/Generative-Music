@@ -1,6 +1,7 @@
 {
-	"NONE": "[Click] 3 buttons in the central panel to enter 3 modes",
-	"PERCUSSION": "[Click] arrows to switch between instruments\n[Drag] tags on the slide bar to set thresholds of 2 sounds\n[Make Voice] to generate sounds",
-	"PLUCK": "[Click] arrows to switch between instruments",
-	"ORCHE": "[Click] arrows to switch between instruments"
+  "NONE": "[Click 3 Buttons in the Central Panel ]\nto enter 3 modes\n[Shake Your Hand upon the Light Sensor ]\nto clear all traks\n[Put Your Hand up the Light Sensor]\n to freeze labels\n[Click the Tonality]\nto lock/unlock it",
+  "NONE-NOLIGHT": "[Click 2 White Buttons in the Central Panel]\n to enter 2 modes\n[Click the Tonality]\nto lock/unlock it\n[Click Clear All Button]\nto clear all tracks\n[Press Freeze Button]\nto freeze labels",
+  "PERCUSSION": "[Click </>]\n to switch between instruments\n[Drag Tags on the Slide Bar]\nto set thresholds of 2 sounds\n[Make Voice]\nto generate sounds\n[Move Your Hand] upon ",
+  "PLUCK": "[Click] arrows to switch between instruments",
+  "ORCHE": "[Click] arrows to switch between instruments"
 }

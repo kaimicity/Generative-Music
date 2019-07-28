@@ -29,6 +29,10 @@ class PanelButton {
     return this.starting;
   }
 
+  void setColor(color c){
+    myColor = c;
+  }
+  
   boolean inButton() {
     float dis = getDistance(mouseX, mouseY, position.x, position.y);
     if ( dis < panelR) {
@@ -74,6 +78,10 @@ class PanelButton {
       }
       break;
     case 2:
+      if (!lightSwitch) {
+        name = "Can Only Work in Lighter Place";
+        stroke(whiteColor);
+      }
       translate(picturePosition, 0);
       scale(1, 0.8);
       line( myWidth / 2, - myHeight * 2 / 3, myWidth / 2, myHeight / 3);

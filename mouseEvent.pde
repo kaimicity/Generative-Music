@@ -14,7 +14,7 @@ void mouseReleased() {
 
   switch(currentPanel) {
   case "NONE":
-    if (test != -1 && !unbonding) {
+    if (test != -1 && !unbonding && bondedNumber < 5 && !(test == 2 && !lightSwitch)) {
       enter = true;
       tempUi = Database.buttonMark[test];
       currentTrack = tracks.get(toBond);
@@ -27,6 +27,11 @@ void mouseReleased() {
           break;
         }
       }
+      //if(test == 2){
+      //  Note note = new OrcheNote(currentTrack.getIndex(), - 1);
+      //  currentTrack.addNote(note);
+      //}
+        
     } else if (clearAllButton.isFocused() && !enter && ! back && !lightSwitch) {
       unbonding = true;
     }
@@ -98,8 +103,10 @@ void mouseReleased() {
       currentOrche = Database.orcheInstruments.get(currentOrcheIndex);
       currentTrack.setInstrument(currentOrche);
     } else if (inBackButton) {
-      Note note = new OrcheNote(currentTrack.getIndex(), - 1);
-      currentTrack.addNote(note);
+      //if (currentTrack.getNoteNumber() > 1) {
+      //  Note note = new OrcheNote(currentTrack.getIndex(), - 1);
+      //  currentTrack.addNote(note);
+      //}
       startBack();
     }
   }

@@ -58,6 +58,9 @@ abstract class Note {
   
   
   void draw() {
+    //if(this.type.equals("ORCHE") && ((OrcheNote)this).isEnd){
+    //  noFill();
+    //}else{
     fill(myColor, trackOpacity);
     noStroke();
     switch(status) {

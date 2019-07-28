@@ -71,6 +71,10 @@ class Label {
   void stopWalking() {
     this.walking = false;
   } 
+  
+  boolean isWalking(){
+    return walking;
+  }
 
   void draw() {
     pushMatrix();

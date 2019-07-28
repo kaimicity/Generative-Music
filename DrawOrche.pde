@@ -1,5 +1,6 @@
 
 int orcheTimeStamp;
+boolean generated;
 void drawOrche() {
   mouseAngle = acos((mouseX - orcheTimerPosition.x) / getDistance(mouseX, mouseY, orcheTimerPosition.x, orcheTimerPosition.y));
   if (mouseY < orcheTimerPosition.y)
@@ -103,7 +104,14 @@ void drawNoteArc(color c) {
   noStroke();
   fill(c);
   if (orcheInterval * 1000 - (millis() - orcheTimeStamp) > 0)
-    arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2, - PI / 2 + PI * 2 * (orcheInterval * 1000 - (millis() - orcheTimeStamp)) / (maxOrcheInterval * 1000));
+    arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2, - PI / 2 + PI * 2 * ((millis() - orcheTimeStamp)) / (maxOrcheInterval * 1000));
+  else {
+    arc(orcheTimerPosition.x, orcheTimerPosition.y, orcheTimerR * 2, orcheTimerR * 2, - PI / 2, - PI / 2 + PI * 2 * (orcheInterval) / (maxOrcheInterval * 1000));
+    if (!generated) {
+      generated = true;
+      generateOrcheNote();
+    }
+  }
 }
 
 void getBallY() {
@@ -135,8 +143,10 @@ void getBallX() {
     currentOrcheNote = (int)((tempY - 40) / (noteBarAreaHeight / 7)) + 1;
     if (currentOrcheNote == 8)
       currentOrcheNote = 7;
-    if (previousNote != currentOrcheNote)
+    if (previousNote != currentOrcheNote){
       orcheTimeStamp = millis();
+      generated = false;
+    }
   }
   ballPosition.x = noteBarAreaPosition.x - 40 + 15 + 40 * currentOrcheNote;
 }
@@ -148,7 +158,7 @@ void drawTheBall() {
   ellipse(ballPosition.x, ballPosition.y, 10, 10);
 }
 
-void generateOrcheNote(){
+void generateOrcheNote() {
   if (currentOrcheNote != 0) {
     Note note = new OrcheNote(currentTrack.getIndex(), currentOrcheNote - 1);
     currentTrack.addNote(note);

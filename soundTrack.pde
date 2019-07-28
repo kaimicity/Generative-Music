@@ -18,6 +18,7 @@ class SoundTrack {
   boolean diminishing;
   String callbackPath;
   boolean orcheSwitch;
+  boolean orcheEnd;
 
   SoundTrack(int i) {
     this.index = i;
@@ -29,6 +30,7 @@ class SoundTrack {
     needActivate = false;
     diminishing = false;
     orcheSwitch = false;
+    orcheEnd = false;
   }
 
   void direct() {
@@ -80,11 +82,22 @@ class SoundTrack {
     needActivate = false;
     diminishing = false;
     orcheSwitch = false;
+    orcheEnd = false;
+  }
+
+  void initPlayer() {
+    orchePlayer = minim.loadFile("Material/pluck/piano/C.mp3");
   }
 
   void unbond() {
     this.bonded = false;
     currentTrack.getLabel().setCreating(false);
+    myNotes = new ArrayList<Note>();
+    noteNumber = 0;
+    if (instrument.getType().equals("ORCHE")) {
+      orchePlayer.pause();
+      orchePlayer = null;
+    }
   }
 
   void setInstrument(Instrument ins) {
@@ -114,16 +127,28 @@ class SoundTrack {
       myLabel.startWalking();
       needActivate = false;
     }
-    if (instrument.getType().equals("ORCHE")) {
-      if (diminishing && orchePlayer.getGain() > -20) {
+    if (instrument != null && myLabel.isWalking() && instrument.getType().equals("ORCHE")) {
+      if (orchePlayer != null && diminishing && orchePlayer.getGain() > -20) {
         orchePlayer.setGain(orchePlayer.getGain() - 1);
         if (orchePlayer.getGain() <= -20) {
           diminishing = false;
-          orchePlayer = minim.loadFile(callbackPath);
-          orchePlayer.rewind();
-          orchePlayer.loop();
+          if (!callbackPath.equals("END")) {
+            orchePlayer.pause();
+            orchePlayer = null;
+            orchePlayer = minim.loadFile(callbackPath);
+            orchePlayer.rewind();
+            if (orcheEnd) {
+              orchePlayer.play();
+              orcheEnd = false;
+              ((OrcheNote)myNotes.get(myNotes.size() - 1)).setEnd();
+              ((OrcheNote)myNotes.get(0)).setEnd();
+            } else {
+              orchePlayer.loop();
+            }
+          } else
+            orchePlayer.pause();
         }
-      } else if (!diminishing && orchePlayer.getGain() < 0) {
+      } else if (orchePlayer != null && !diminishing && orchePlayer.getGain() < 0) {
         orchePlayer.setGain(orchePlayer.getGain() + 1);
       }
     }
@@ -131,11 +156,11 @@ class SoundTrack {
 
   void register(Note n) {
     if (lastValidTime > 0)
-      mainLength += millis() - lastValidTime;
+    mainLength += millis() - lastValidTime;
     lastValidTime = millis();
     n.setTimePoint(mainLength);
     if (this.mainLength > leastMainLength)
-      this.preLength = mainLength / 3;
+    this.preLength = mainLength / 3;
     for (Note note : myNotes) {
       if (mainLength > leastMainLength) {
         note.setTarget(PI * 7 / 6 - ((float)note.getTimePoint() / mainLength) * PI * 4 / 3);
@@ -148,7 +173,7 @@ class SoundTrack {
   boolean allNotesReady() {
     for (Note n : myNotes) {
       if (!n.isWaiting())
-        return false;
+      return false;
     }
     return true;
   }
@@ -163,6 +188,10 @@ class SoundTrack {
       }
       myLabel.setSpeed(noteSpeed * ((float)Math.random() * 0.05 + 0.15));
       myLabel.startWalking();
+      if (instrument.getType().equals("ORCHE")) {
+        ((OrcheNote)myNotes.get(myNotes.size() - 1)).setEnd();
+        ((OrcheNote)myNotes.get(0)).setEnd();
+      }
     } else
       needActivate = true;
   }
@@ -190,10 +219,18 @@ class SoundTrack {
   AudioPlayer getOrchePlayer() {
     return this.orchePlayer;
   }
-  
-  void diminish(){
+
+  void diminish() {
     diminishing = true;
-    callbackPath = null;
+    callbackPath = "END";
     orcheSwitch = false;
+  }
+
+  void setEnd() {
+    this.orcheEnd = true;
+  }
+
+  boolean bothEnd() {
+    return ((OrcheNote)myNotes.get(myNotes.size() - 1)).getEnd() && ((OrcheNote)myNotes.get(0)).getEnd();
   }
 }

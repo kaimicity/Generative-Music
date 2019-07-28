@@ -27,6 +27,8 @@ void config() {
     if (uiOpacity >= 255) {
       enter = false;
       currentTrack.getLabel().setCreating(false);
+      if(currentPanel.equals("ORCHE"))
+        currentTrack.initPlayer();
     }
   } 
   if (back) {

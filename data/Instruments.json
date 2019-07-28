@@ -344,289 +344,289 @@
       "paths": [
         {
           "name": "C",
-          "path": "Material/pluck/piano/C.mp3"
+          "path": "Material/orche/violin/C.mp3"
         },
         {
           "name": "C#",
-          "path": "Material/pluck/piano/C#.mp3"
+          "path": "Material/orche/violin/C#.mp3"
         },
         {
           "name": "D",
-          "path": "Material/pluck/piano/D.mp3"
+          "path": "Material/orche/violin/D.mp3"
         },
         {
           "name": "D#",
-          "path": "Material/pluck/piano/D#.mp3"
+          "path": "Material/orche/violin/D#.mp3"
         },
         {
           "name": "E",
-          "path": "Material/pluck/piano/E.mp3"
+          "path": "Material/orche/violin/E.mp3"
         },
         {
           "name": "F",
-          "path": "Material/pluck/piano/F.mp3"
+          "path": "Material/orche/violin/F.mp3"
         },
         {
           "name": "F#",
-          "path": "Material/pluck/piano/F#.mp3"
+          "path": "Material/orche/violin/F#.mp3"
         },
         {
           "name": "G",
-          "path": "Material/pluck/piano/G.mp3"
+          "path": "Material/orche/violin/G.mp3"
         },
         {
           "name": "G#",
-          "path": "Material/pluck/piano/G#.mp3"
+          "path": "Material/orche/violin/G#.mp3"
         },
         {
           "name": "A",
-          "path": "Material/pluck/piano/A.mp3"
+          "path": "Material/orche/violin/A.mp3"
         },
         {
           "name": "A#",
-          "path": "Material/pluck/piano/A#.mp3"
+          "path": "Material/orche/violin/A#.mp3"
         },
         {
           "name": "B",
-          "path": "Material/pluck/piano/B.mp3"
+          "path": "Material/orche/violin/B.mp3"
         },
         {
           "name": "C2",
-          "path": "Material/pluck/piano/C2.mp3"
+          "path": "Material/orche/violin/C2.mp3"
         },
         {
           "name": "C#2",
-          "path": "Material/pluck/piano/C#2.mp3"
+          "path": "Material/orche/violin/C#2.mp3"
         },
         {
           "name": "D2",
-          "path": "Material/pluck/piano/D2.mp3"
+          "path": "Material/orche/violin/D2.mp3"
         },
         {
           "name": "D#2",
-          "path": "Material/pluck/piano/D#2.mp3"
+          "path": "Material/orche/violin/D#2.mp3"
         },
         {
           "name": "E2",
-          "path": "Material/pluck/piano/E2.mp3"
+          "path": "Material/orche/violin/E2.mp3"
         },
         {
           "name": "F2",
-          "path": "Material/pluck/piano/F2.mp3"
+          "path": "Material/orche/violin/F2.mp3"
         },
         {
           "name": "F#2",
-          "path": "Material/pluck/piano/F#2.mp3"
+          "path": "Material/orche/violin/F#2.mp3"
         },
         {
           "name": "G2",
-          "path": "Material/pluck/piano/G2.mp3"
+          "path": "Material/orche/violin/G2.mp3"
         },
         {
           "name": "G#2",
-          "path": "Material/pluck/piano/G#2.mp3"
+          "path": "Material/orche/violin/G#2.mp3"
         },
         {
           "name": "A2",
-          "path": "Material/pluck/piano/A2.mp3"
+          "path": "Material/orche/violin/A2.mp3"
         },
         {
           "name": "A#2",
-          "path": "Material/pluck/piano/A#2.mp3"
+          "path": "Material/orche/violin/A#2.mp3"
         }
       ]
     },
     {
-      "name": "Violin2",
+      "name": "Trumpet",
       "paths": [
         {
           "name": "C",
-          "path": "Material/pluck/piano/C.mp3"
+          "path": "Material/orche/trumpet/C.mp3"
         },
         {
           "name": "C#",
-          "path": "Material/pluck/piano/C#.mp3"
+          "path": "Material/orche/trumpet/C#.mp3"
         },
         {
           "name": "D",
-          "path": "Material/pluck/piano/D.mp3"
+          "path": "Material/orche/trumpet/D.mp3"
         },
         {
           "name": "D#",
-          "path": "Material/pluck/piano/D#.mp3"
+          "path": "Material/orche/trumpet/D#.mp3"
         },
         {
           "name": "E",
-          "path": "Material/pluck/piano/E.mp3"
+          "path": "Material/orche/trumpet/E.mp3"
         },
         {
           "name": "F",
-          "path": "Material/pluck/piano/F.mp3"
+          "path": "Material/orche/trumpet/F.mp3"
         },
         {
           "name": "F#",
-          "path": "Material/pluck/piano/F#.mp3"
+          "path": "Material/orche/trumpet/F#.mp3"
         },
         {
           "name": "G",
-          "path": "Material/pluck/piano/G.mp3"
+          "path": "Material/orche/trumpet/G.mp3"
         },
         {
           "name": "G#",
-          "path": "Material/pluck/piano/G#.mp3"
+          "path": "Material/orche/trumpet/G#.mp3"
         },
         {
           "name": "A",
-          "path": "Material/pluck/piano/A.mp3"
+          "path": "Material/orche/trumpet/A.mp3"
         },
         {
           "name": "A#",
-          "path": "Material/pluck/piano/A#.mp3"
+          "path": "Material/orche/trumpet/A#.mp3"
         },
         {
           "name": "B",
-          "path": "Material/pluck/piano/B.mp3"
+          "path": "Material/orche/trumpet/B.mp3"
         },
         {
           "name": "C2",
-          "path": "Material/pluck/piano/C2.mp3"
+          "path": "Material/orche/trumpet/C2.mp3"
         },
         {
           "name": "C#2",
-          "path": "Material/pluck/piano/C#2.mp3"
+          "path": "Material/orche/trumpet/C#2.mp3"
         },
         {
           "name": "D2",
-          "path": "Material/pluck/piano/D2.mp3"
+          "path": "Material/orche/trumpet/D2.mp3"
         },
         {
           "name": "D#2",
-          "path": "Material/pluck/piano/D#2.mp3"
+          "path": "Material/orche/trumpet/D#2.mp3"
         },
         {
           "name": "E2",
-          "path": "Material/pluck/piano/E2.mp3"
+          "path": "Material/orche/trumpet/E2.mp3"
         },
         {
           "name": "F2",
-          "path": "Material/pluck/piano/F2.mp3"
+          "path": "Material/orche/trumpet/F2.mp3"
         },
         {
           "name": "F#2",
-          "path": "Material/pluck/piano/F#2.mp3"
+          "path": "Material/orche/trumpet/F#2.mp3"
         },
         {
           "name": "G2",
-          "path": "Material/pluck/piano/G2.mp3"
+          "path": "Material/orche/trumpet/G2.mp3"
         },
         {
           "name": "G#2",
-          "path": "Material/pluck/piano/G#2.mp3"
+          "path": "Material/orche/trumpet/G#2.mp3"
         },
         {
           "name": "A2",
-          "path": "Material/pluck/piano/A2.mp3"
+          "path": "Material/orche/trumpet/A2.mp3"
         },
         {
           "name": "A#2",
-          "path": "Material/pluck/piano/A#2.mp3"
+          "path": "Material/orche/trumpet/A#2.mp3"
         }
       ]
     },
     {
-      "name": "Violin3",
+      "name": "Organ",
       "paths": [
         {
           "name": "C",
-          "path": "Material/pluck/piano/C.mp3"
+          "path": "Material/orche/organ/C.mp3"
         },
         {
           "name": "C#",
-          "path": "Material/pluck/piano/C#.mp3"
+          "path": "Material/orche/organ/C#.mp3"
         },
         {
           "name": "D",
-          "path": "Material/pluck/piano/D.mp3"
+          "path": "Material/orche/organ/D.mp3"
         },
         {
           "name": "D#",
-          "path": "Material/pluck/piano/D#.mp3"
+          "path": "Material/orche/organ/D#.mp3"
         },
         {
           "name": "E",
-          "path": "Material/pluck/piano/E.mp3"
+          "path": "Material/orche/organ/E.mp3"
         },
         {
           "name": "F",
-          "path": "Material/pluck/piano/F.mp3"
+          "path": "Material/orche/organ/F.mp3"
         },
         {
           "name": "F#",
-          "path": "Material/pluck/piano/F#.mp3"
+          "path": "Material/orche/organ/F#.mp3"
         },
         {
           "name": "G",
-          "path": "Material/pluck/piano/G.mp3"
+          "path": "Material/orche/organ/G.mp3"
         },
         {
           "name": "G#",
-          "path": "Material/pluck/piano/G#.mp3"
+          "path": "Material/orche/organ/G#.mp3"
         },
         {
           "name": "A",
-          "path": "Material/pluck/piano/A.mp3"
+          "path": "Material/orche/organ/A.mp3"
         },
         {
           "name": "A#",
-          "path": "Material/pluck/piano/A#.mp3"
+          "path": "Material/orche/organ/A#.mp3"
         },
         {
           "name": "B",
-          "path": "Material/pluck/piano/B.mp3"
+          "path": "Material/orche/organ/B.mp3"
         },
         {
           "name": "C2",
-          "path": "Material/pluck/piano/C2.mp3"
+          "path": "Material/orche/organ/C2.mp3"
         },
         {
           "name": "C#2",
-          "path": "Material/pluck/piano/C#2.mp3"
+          "path": "Material/orche/organ/C#2.mp3"
         },
         {
           "name": "D2",
-          "path": "Material/pluck/piano/D2.mp3"
+          "path": "Material/orche/organ/D2.mp3"
         },
         {
           "name": "D#2",
-          "path": "Material/pluck/piano/D#2.mp3"
+          "path": "Material/orche/organ/D#2.mp3"
         },
         {
           "name": "E2",
-          "path": "Material/pluck/piano/E2.mp3"
+          "path": "Material/orche/organ/E2.mp3"
         },
         {
           "name": "F2",
-          "path": "Material/pluck/piano/F2.mp3"
+          "path": "Material/orche/organ/F2.mp3"
         },
         {
           "name": "F#2",
-          "path": "Material/pluck/piano/F#2.mp3"
+          "path": "Material/orche/organ/F#2.mp3"
         },
         {
           "name": "G2",
-          "path": "Material/pluck/piano/G2.mp3"
+          "path": "Material/orche/organ/G2.mp3"
         },
         {
           "name": "G#2",
-          "path": "Material/pluck/piano/G#2.mp3"
+          "path": "Material/orche/organ/G#2.mp3"
         },
         {
           "name": "A2",
-          "path": "Material/pluck/piano/A2.mp3"
+          "path": "Material/orche/organ/A2.mp3"
         },
         {
           "name": "A#2",
-          "path": "Material/pluck/piano/A#2.mp3"
+          "path": "Material/orche/organ/A#2.mp3"
         }
       ]
     }
