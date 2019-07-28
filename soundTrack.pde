@@ -190,4 +190,10 @@ class SoundTrack {
   AudioPlayer getOrchePlayer() {
     return this.orchePlayer;
   }
+  
+  void diminish(){
+    diminishing = true;
+    callbackPath = null;
+    orcheSwitch = false;
+  }
 }

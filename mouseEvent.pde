@@ -98,6 +98,8 @@ void mouseReleased() {
       currentOrche = Database.orcheInstruments.get(currentOrcheIndex);
       currentTrack.setInstrument(currentOrche);
     } else if (inBackButton) {
+      Note note = new OrcheNote(currentTrack.getIndex(), - 1);
+      currentTrack.addNote(note);
       startBack();
     }
   }

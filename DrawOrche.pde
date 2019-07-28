@@ -150,7 +150,7 @@ void drawTheBall() {
 
 void generateOrcheNote(){
   if (currentOrcheNote != 0) {
-    //Note note = new PluckNote(currentTrack.getIndex(), currentSyllable.getName());
-    //currentTrack.addNote(note);
+    Note note = new OrcheNote(currentTrack.getIndex(), currentOrcheNote - 1);
+    currentTrack.addNote(note);
   }
 }

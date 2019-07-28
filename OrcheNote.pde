@@ -2,7 +2,7 @@ class OrcheNote extends Note {
   int naturalSyllable;
   boolean isEnd;
   String audioPath;
-  OrcheNote(int trackIndex, String slb) {
+  OrcheNote(int trackIndex, int slb) {
     this.trackIndex = trackIndex;
     this.position = new PVector(stonePosition.x, stonePosition.y);
     this.r = stoneR;
@@ -11,9 +11,9 @@ class OrcheNote extends Note {
     this.standardPosition = new PVector(roulettePosition.x + (rouletteInR + trackIndex * interval) * cos(myangle), roulettePosition.y + (rouletteInR + trackIndex * interval) * sin(myangle));
     status = "BIRTH";
     this.type = "ORCHE";
-    if (!slb.equals("END")) {
+    if (slb != -1) {
       isEnd = false;
-      naturalSyllable = natureTonality.getSyllableIndex(slb);
+      naturalSyllable = slb;
     } else
       isEnd = true;
     setColor();
@@ -30,6 +30,9 @@ class OrcheNote extends Note {
   }
   
   void play(){
-    tracks.get(trackIndex).setOrchePlayer(audioPath);
+    if(!isEnd)
+      tracks.get(trackIndex).setOrchePlayer(audioPath);
+    else
+      tracks.get(trackIndex).diminish();
   }
 }
