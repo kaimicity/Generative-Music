@@ -1,7 +1,10 @@
 {
   "NONE": "[Click 3 Buttons in the Central Panel ]\nto enter 3 modes\n[Shake Your Hand upon the Light Sensor ]\nto clear all traks\n[Put Your Hand up the Light Sensor]\n to freeze labels\n[Click the Tonality]\nto lock/unlock it",
   "NONE-NOLIGHT": "[Click 2 White Buttons in the Central Panel]\n to enter 2 modes\n[Click the Tonality]\nto lock/unlock it\n[Click Clear All Button]\nto clear all tracks\n[Press Freeze Button]\nto freeze labels",
-  "PERCUSSION": "[Click </>]\n to switch between instruments\n[Drag Tags on the Slide Bar]\nto set thresholds of 2 sounds\n[Make Voice]\nto generate sounds\n[Move Your Hand] upon ",
-  "PLUCK": "[Click] arrows to switch between instruments",
-  "ORCHE": "[Click] arrows to switch between instruments"
+  "PERCUSSION": "[Click </>]\n to switch between instruments\n[Drag Tags on the Slide Bar]\nto set thresholds of 2 sounds\n[Make Voice]\nto generate sounds\n[Move Your Hand upon the Light Sensor]\nto go back\n[Click the Tonality]\nto lock/unlock it",
+  "PERCUSSION-NOLIGHT": "[Click </>]\n to switch between instruments\n[Drag Tags on the Slide Bar]\nto set thresholds of 2 sounds\n[Make Voice]\nto generate sounds\n[Click Back Button]\nto go back\n[Click the Tonality]\nto lock/unlock it",
+  "PLUCK": "[Click </>]\n to switch between instruments\n[Drag Tag on the Slide Bar]\nto set interval\n[Click Start]\nto start generation\n[Rotate Knob]\to change note\n[Move Your Hand upon the Light Sensor]\nto go back\n[Click the Tonality]\nto lock/unlock it",
+  "PLUCK-NOLIGHT": "[Click </>]\n to switch between instruments\n[Drag Tag on the Slide Bar]\nto set interval\n[Click Start]\nto start generation\n[Rotate Knob]\to change note\n[Click Back Button]\nto go back\n[Click the Tonality]\nto lock/unlock it",
+  "ORCHE": "[Click </>]\n to switch between instruments\n[Keep Your Hand upon the Light Sensor] to generate note\n[Drag the Time Tag]\nto change the cost time\n[Move Your Hand upon the Light Sensor]\nto go back\n[Click the Tonality]\nto lock/unlock it",
+  "ORCHE-NOLIGHT": "[Click </>]\n to switch between instruments\n[Keep Your Hand upon the Light Sensor] to generate note\n[Drag the Time Tag]\nto change the cost time\n[Click Back Button]\nto go back\n[Click the Tonality]\nto lock/unlock it"
 }

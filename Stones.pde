@@ -138,8 +138,8 @@ void setup() {
   roulettePosition = new PVector(200 + width * 4 / 7, height * 9 / 20);
   instructionPosition = new PVector(width / 10, height / 10);
   instrumentPosition = new PVector(200 + width * 4 / 7, height * 7 / 20);
-  backButtonPosition = new PVector(width / 10, height * 13 / 20);
-  freezeButtonPosition = new PVector(width / 10, height * 16 / 20);
+  backButtonPosition = new PVector(width / 10, height * 13 / 20 + 50);
+  freezeButtonPosition = new PVector(width / 10, height * 16 / 20 + 50);
   scrollPosition = new PVector(width / 10 - width / 50, height / 10 - height / 100);
   stonePosition = new PVector(200 + width * 4 / 7, height * 10 / 20);
   knobPosition = new PVector(200 + width * 4 / 7, height + 300);
@@ -151,7 +151,7 @@ void setup() {
   backButtonWidth = width * 2 / 7;
   backButtonHeight = height / 10;
   instructionWidth = width * 2 / 7;
-  instructionHeight = height / 2;
+  instructionHeight = height / 2 + 50;
   instrumentOffset = PI / 3;
   maxSound = 0.15;
   panelOffset = 0;
@@ -259,6 +259,7 @@ void init() {
   maxOrcheInterval = 4.0;
   currentOrcheNote = 0;
   indoorLight = 0.0;
+  temprature = 0;
 
   showInstruction = true;
   enter = false;
@@ -268,6 +269,7 @@ void init() {
   freezing = false;
   started = false;
   tonalityLocked = false;
+  tonalityFlag = false;
 
   currentPanel = "NONE";
 

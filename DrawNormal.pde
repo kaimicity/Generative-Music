@@ -14,7 +14,11 @@ void drawInstruction(int opa) {
   textAlign(LEFT, TOP);
   textFont(nameFont);
   textSize(20);
-  text(instructions.getString(currentPanel), instructionPosition.x + 10, instructionPosition.y - scrollCurrentY + 10, instructionWidth - 20, instructionHeight - 20);
+  if (!lightSwitch)
+    text(instructions.getString(currentPanel + "-NOLIGHT"), instructionPosition.x + 10, instructionPosition.y - scrollCurrentY + 10, instructionWidth - 20, instructionHeight - 20);
+  else
+    text(instructions.getString(currentPanel), instructionPosition.x + 10, instructionPosition.y - scrollCurrentY + 10, instructionWidth - 20, instructionHeight - 20);
+
   fill(whiteColor);
   strokeWeight(panelStrokeWidth / 2);
   rect(scrollPosition.x, scrollPosition.y, scrollWidth, scrollHeight);
@@ -119,19 +123,21 @@ boolean freezing;
 double temprature;
 boolean isMajor;
 boolean tonalityLocked;
+boolean tonalityFlag;
 double mouseAngle;
 
 void draw() {
-  if (indoorLight == 0.0) {  
+  while (temprature == 0) {  
     try {
       indoorLight = lightSensor.getSensorValue();
       println(indoorLight);
       temprature = tempratureSensor.getSensorValue();
+      println(temprature);
       if (indoorLight < 0.2)
         lightSwitch = false;
       else
         lightSwitch = true;
-      if (temprature > 26)
+      if (temprature > 1.875)
         isMajor = false;
       else
         isMajor = true;
@@ -143,6 +149,11 @@ void draw() {
     tonalityTimeStamp = millis();
     resetTonality();
   }
+  //if (!tonalityFlag) {
+  //  tonalityTimeStamp = millis();
+  //  resetTonality();
+  //  tonalityFlag = true;
+  //}
   if (!tonalityLocked && millis() - tonalityTimeStamp >= 120000) {
     resetTonality();
     tonalityTimeStamp = millis();
