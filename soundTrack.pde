@@ -137,7 +137,9 @@ class SoundTrack {
             orchePlayer = null;
             orchePlayer = minim.loadFile(callbackPath);
             orchePlayer.rewind();
-            if (orcheEnd) {
+            if (currentPanel.equals("PERCUSSION"))
+              orchePlayer.pause();
+            else if (orcheEnd) {
               orchePlayer.play();
               orcheEnd = false;
               ((OrcheNote)myNotes.get(myNotes.size() - 1)).setEnd();
@@ -156,11 +158,11 @@ class SoundTrack {
 
   void register(Note n) {
     if (lastValidTime > 0)
-    mainLength += millis() - lastValidTime;
+      mainLength += millis() - lastValidTime;
     lastValidTime = millis();
     n.setTimePoint(mainLength);
     if (this.mainLength > leastMainLength)
-    this.preLength = mainLength / 3;
+      this.preLength = mainLength / 3;
     for (Note note : myNotes) {
       if (mainLength > leastMainLength) {
         note.setTarget(PI * 7 / 6 - ((float)note.getTimePoint() / mainLength) * PI * 4 / 3);
@@ -173,7 +175,7 @@ class SoundTrack {
   boolean allNotesReady() {
     for (Note n : myNotes) {
       if (!n.isWaiting())
-      return false;
+        return false;
     }
     return true;
   }

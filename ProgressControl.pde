@@ -29,13 +29,21 @@ void config() {
       currentTrack.getLabel().setCreating(false);
       if(currentPanel.equals("ORCHE"))
         currentTrack.initPlayer();
+      else if(currentPanel.equals("PERCUSSION")){
+        for(SoundTrack st: tracks){
+          if(st.instrument != null && st.instrument.getType().equals("ORCHE"))
+            st.orchePlayer.pause();
+        }
+        
+        
+      }
     }
   } 
   if (back) {
     back();
   }
   drawInstruction(uiOpacity);
-  if (!enter && !back && !currentPanel.equals("ORCHE")) {
+  if (!enter && !back && !currentPanel.equals("ORCHE") && lightSwitch) {
     try {
       lightValue = lightSensor.getSensorValue();
       if (indoorLight - lightValue > 0.03 && currentTrack.allNotesReady()) {
