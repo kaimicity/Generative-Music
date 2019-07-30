@@ -130,14 +130,14 @@ void draw() {
   while (temprature == 0) {  
     try {
       indoorLight = lightSensor.getSensorValue();
-      println(indoorLight);
+      println("light:" + indoorLight);
       temprature = tempratureSensor.getSensorValue();
-      println(temprature);
+      println("temperature:" + temprature);
       if (indoorLight < 0.2)
         lightSwitch = false;
       else
         lightSwitch = true;
-      if (temprature > 1.875)
+      if (temprature > 2.0)
         isMajor = false;
       else
         isMajor = true;
