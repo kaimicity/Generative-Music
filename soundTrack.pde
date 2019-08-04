@@ -9,8 +9,10 @@ class SoundTrack {
   ArrayList<Note> myNotes;
   int mainLength;
   int leastWholeLength = 5000;
-  int preLength = leastWholeLength / 3;
-  int leastMainLength = leastWholeLength * 2 / 3;
+  int preLength = leastWholeLength / 5;
+  int leastMainLength = leastWholeLength * 4 / 5;
+  int leastPrelength = leastWholeLength / 5;
+  int maxPreLength = 2000;
   int noteNumber;
   int direction;
   boolean needActivate;
@@ -162,14 +164,22 @@ class SoundTrack {
     lastValidTime = millis();
     n.setTimePoint(mainLength);
     if (this.mainLength > leastMainLength)
-      this.preLength = mainLength / 3;
-    for (Note note : myNotes) {
-      if (mainLength > leastMainLength) {
-        note.setTarget(PI * 7 / 6 - ((float)note.getTimePoint() / mainLength) * PI * 4 / 3);
-      } else {
-        note.setTarget(PI * 7 / 6 - (1 - ((float)(mainLength - note.getTimePoint()) / leastMainLength)) * PI * 4 / 3);
+      this.preLength = mainLength / 4;
+    //if (preLength < maxPreLength) {
+      for (Note note : myNotes) {
+        if (mainLength > leastMainLength) {
+          note.setTarget(PI * 13 / 10 - ((float)note.getTimePoint() / mainLength) * PI * 8 / 5);
+        } else {
+          note.setTarget(PI * 13 / 10 - (1 - ((float)(mainLength - note.getTimePoint()) / leastMainLength)) * PI * 8 / 5);
+        }
       }
-    }
+    //} else {
+    //  preLength = maxPreLength;
+    //  float intervalAngle = PI * 2 * (preLength / (preLength + mainLength)) / 2;
+    //  for (Note note : myNotes) {
+    //      note.setTarget( (PI * 3 / 2 -intervalAngle) - (1 - ((float)(mainLength - note.getTimePoint()) / leastMainLength)) * (PI * 2 - intervalAngle * 2));
+    //  }
+    //}
   }
 
   boolean allNotesReady() {
@@ -182,7 +192,12 @@ class SoundTrack {
 
   void activate() {
     if (allNotesReady()) {
-      float noteSpeed = PI * 2 * 1000 / (preLength + mainLength) / frameRate;
+      float noteSpeed;
+      if (mainLength > leastMainLength) 
+        noteSpeed = PI * 2 * 1000 / (preLength + mainLength) / frameRate;
+      else {
+        noteSpeed = PI * 2 * 1000 / leastWholeLength / frameRate;
+      }
       for (Note n : myNotes) {
         n.setStatus("RUN");
         n.setSpeed(noteSpeed);

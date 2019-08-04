@@ -5,7 +5,7 @@ class PercussionNote extends Note {
     this.trackIndex = trackIndex;
     this.position = new PVector(stonePosition.x, stonePosition.y);
     this.r = stoneR;
-    this.myangle =  PI * 11 / 6 ;
+    this.myangle =  PI * 17 / 10 ;
     this.target = myangle;
     this.standardPosition = new PVector(roulettePosition.x + (rouletteInR + trackIndex * interval) * cos(myangle), roulettePosition.y + (rouletteInR + trackIndex * interval) * sin(myangle));
     status = "BIRTH";

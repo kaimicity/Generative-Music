@@ -13,7 +13,7 @@ void drawInstruction(int opa) {
   fill(normalStroke, opa);
   textAlign(LEFT, TOP);
   textFont(nameFont);
-  textSize(20);
+  textSize(18);
   if (!lightSwitch)
     text(instructions.getString(currentPanel + "-NOLIGHT"), instructionPosition.x + 10, instructionPosition.y - scrollCurrentY + 10, instructionWidth - 20, instructionHeight - 20);
   else
@@ -166,7 +166,7 @@ void draw() {
   inTonality = inTonality();
   switch(currentPanel) {
   case "NONE":
-    if (bondedNumber < 5)
+    if (!(bondedNumber == 5 && allTracksHasNote()))
       drawPanel();
     drawInstruction(panelOpacity);
     inFreezeButton = freezeButton.isFocused();
@@ -221,7 +221,7 @@ void draw() {
       if (panelOpacity >= 255) {
         back = false;
       }
-    } else if (test != -1 && bondedNumber < 5) {
+    } else if (test != -1 && !(bondedNumber == 5 && allTracksHasNote())) {
       textAlign(CENTER, CENTER);
       textFont(nameFont);
       textSize(height / 15);
@@ -314,6 +314,10 @@ void draw() {
         pluckInterval = thresholdInterval + (timeTagX - 0.75) * (maxInterval - thresholdInterval) / 0.25;
       }
       pluckInterval = (float)((int)(pluckInterval * 100)) / 100;
+      if(pluckInterval < 0.5){
+        pluckInterval = 0.5;
+        timeTagX = 0.375;
+      }
     }
     break;
   case "ORCHE":
