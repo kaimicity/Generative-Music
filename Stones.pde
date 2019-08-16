@@ -207,23 +207,29 @@ void setup() {
   clearAllButton = new Button(backButtonPosition, backButtonWidth, backButtonHeight, "CLEAR ALL");
   freezeButton = new Button(freezeButtonPosition, backButtonWidth, backButtonHeight, "FREEZE");
 
-
+  JSONObject configSensor = loadJSONObject("config.json");
+  int SERIAL = configSensor.getInt("serial");
+  int soundChannel = configSensor.getInt("sound_channel");
+  int lightChannel = configSensor.getInt("light_channel");
+  int rotationChannel = configSensor.getInt("rotation_channel");
+  int tempChannel = configSensor.getInt("temperature_channel");
+  
   try {
     soundSensor = new VoltageInput();
-    soundSensor.setDeviceSerialNumber(274066);     
-    soundSensor.setChannel(1);  
+    soundSensor.setDeviceSerialNumber(SERIAL);     
+    soundSensor.setChannel(soundChannel);  
     soundSensor.open();
     lightSensor = new VoltageInput();
-    lightSensor.setDeviceSerialNumber(274066);     
-    lightSensor.setChannel(0);  
+    lightSensor.setDeviceSerialNumber(SERIAL);     
+    lightSensor.setChannel(lightChannel);  
     lightSensor.open();
     rotationSensor = new VoltageRatioInput();
-    rotationSensor.setDeviceSerialNumber(274066); 
-    rotationSensor.setChannel(6);
+    rotationSensor.setDeviceSerialNumber(SERIAL); 
+    rotationSensor.setChannel(rotationChannel);
     rotationSensor.open();
     tempratureSensor = new VoltageInput();
-    tempratureSensor.setDeviceSerialNumber(274066);
-    tempratureSensor.setChannel(7);
+    tempratureSensor.setDeviceSerialNumber(SERIAL);
+    tempratureSensor.setChannel(tempChannel);
     tempratureSensor.open();
   } 
   catch (Exception e) {    
