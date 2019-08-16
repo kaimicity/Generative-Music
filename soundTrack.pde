@@ -32,6 +32,8 @@ class SoundTrack {
     needActivate = false;
     diminishing = false;
     orcheSwitch = false;
+    bonded = false;
+    this.instrument = null;
     orcheEnd = false;
   }
 

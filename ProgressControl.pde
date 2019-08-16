@@ -31,7 +31,7 @@ void config() {
         currentTrack.initPlayer();
       else if(currentPanel.equals("PERCUSSION")){
         for(SoundTrack st: tracks){
-          if(st.instrument != null && st.isBonded() && st.instrument.getType().equals("ORCHE"))
+          if(st.isBonded() && st.instrument != null && st.instrument.getType().equals("ORCHE"))
             st.orchePlayer.pause();
         }
         
